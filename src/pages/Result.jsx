@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Image } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
 import StyledArticle from '../component/Article';
 import styled from 'styled-components';
@@ -71,7 +71,7 @@ function shareFacebook() {
   window.open("http://www.facebook.com/sharer/sharer.php?u=" + sendUrl);
 }
 function shareKakao() {
-  var sendUrl = getUrl();
+  // var sendUrl = getUrl();
   
   console.log("?");
   // 카카오링크 버튼 생성
@@ -109,18 +109,18 @@ function shareUrl() {
     <StyledArticle>
       <h1>Result Page</h1>
       {
-        resultImages.map((content, idx) => {
-          if (idx+1 == imgTest) {
-            return (
-              <StyledDiv className="content" key={idx}>
-                <ResultImage
-                  src={content["src"]} alt={content["src"]}>
-                </ResultImage>
-                <h2>{content["title"]}</h2>
-                <h3>{content["content"]}</h3>
-              </StyledDiv>
-            );
-          }
+        resultImages
+        .filter((content, idx) => idx + 1 === imgTest)
+        .map((content, idx) => {
+          return (
+            <StyledDiv className="content" key={idx}>
+              <ResultImage
+                src={content["src"]} alt={content["src"]}>
+              </ResultImage>
+              <h2>{content["title"]}</h2>
+              <h3>{content["content"]}</h3>
+            </StyledDiv>
+          );
         })
       }
       <StyledDiv>
