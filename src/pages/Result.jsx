@@ -23,7 +23,7 @@ const StyledDiv = styled.div`
 
 const Result = () => {
   // image 확인용 test 숫자
-  const imgTest = "12";
+  const imgTest = 12;
 
   const resultImages = [
     {"result": "1", "title":"result: 1", "content":"content", "src": "/images/ENFJ.jpg"},
@@ -103,7 +103,6 @@ function shareUrl() {
   alert("URL이 복사되었습니다.")  // 알림창
   return sendUrl;
 }
-
 
   return (
     <StyledArticle>
