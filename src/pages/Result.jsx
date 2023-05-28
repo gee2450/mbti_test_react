@@ -124,16 +124,16 @@ function shareUrl() {
         })
       }
       <StyledDiv>
-        <a href="#" title="새창" onClick={shareUrl}>
+        <a href="#!" title="새창" onClick={shareUrl}>
           <ShareImage src="/images/icon-link.png" alt="link" />
         </a>
-        <a onClick={shareFacebook}>
+        <a href="#!" onClick={shareFacebook}>
           <ShareImage src="/images/icon-facebook.png" alt="" />
         </a>
-        <a onClick={shareTwitter}>
+        <a href="#!" onClick={shareTwitter}>
           <ShareImage src="/images/icon-twitter.png" alt="" />
         </a>
-        <a onClick={shareKakao}>
+        <a href="#!" onClick={shareKakao}>
           <ShareImage src="/images/icon-kakao.png" alt="" />
         </a>
       </StyledDiv>
