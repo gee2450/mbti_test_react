@@ -25,7 +25,7 @@ const Test = () => {
   const navigate = useNavigate();
 
   const next = () => {
-    if (progress == problemNum)
+    if (progress === problemNum)
     {
       navigate('/result');
     }
@@ -39,15 +39,15 @@ const Test = () => {
       <ProgressBar variant="warning" now={100 / problemNum * progress}></ProgressBar>
       <h4>{progress}</h4>
       {
-        problems.map((content, idx)=>{
-          if (progress == idx + 1) {
-            return(
-              <div key={idx}>
-                <h1 className='test-no text-center'>{content["test-no"]}</h1>
-                <h3 className='test-content text-center'>{content["test-content"]}</h3>
-              </div>
-            );
-          }
+        problems
+        .filter((content, idx) => progress === idx + 1)
+        .map((content, idx) => {
+          return(
+            <div key={idx}>
+              <h1 className='test-no text-center'>{content["test-no"]}</h1>
+              <h3 className='test-content text-center'>{content["test-content"]}</h3>
+            </div>
+          );
         })
       }
       <div className="btn-wrap d-grid gap-2">
