@@ -1,43 +1,48 @@
 import { Button, ProgressBar } from 'react-bootstrap';
-import { React, useState, useEffect } from 'react';
+import { React, useState, useEffect, useMemo } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useForm, useFieldArray } from "react-hook-form";
 import StyledArticle from '../component/Article';
 
 const Test = () => {
-  // 임시 problems
-  const problems = [
-    {"test-no": "문제 1번", "test-content": "문제내용", "type": "EI", "A":"E", "B":"I"},
-    {"test-no": "문제 2번", "test-content": "문제내용", "type": "JP", "A":"J", "B":"P"},
-    {"test-no": "문제 3번", "test-content": "문제내용", "type": "SN", "A":"S", "B":"N"},
-    {"test-no": "문제 4번", "test-content": "문제내용", "type": "JP", "A":"J", "B":"P"},
-    {"test-no": "문제 5번", "test-content": "문제내용", "type": "EI", "A":"E", "B":"I"},
-    {"test-no": "문제 6번", "test-content": "문제내용", "type": "TF", "A":"T", "B":"F"},
-    {"test-no": "문제 7번", "test-content": "문제내용", "type": "TF", "A":"T", "B":"F"},
-    {"test-no": "문제 8번", "test-content": "문제내용", "type": "SN", "A":"S", "B":"N"},
-    {"test-no": "문제 9번", "test-content": "문제내용", "type": "EI", "A":"E", "B":"I"},
-    {"test-no": "문제 10번", "test-content": "문제내용", "type": "TF", "A":"T", "B":"F"},
-    {"test-no": "문제 11번", "test-content": "문제내용", "type": "JP", "A":"J", "B":"P"},
-    {"test-no": "문제 12번", "test-content": "문제내용", "type": "SN", "A":"S", "B":"N"},
-  ];
-
-  var typeArray = new Set();
-  problems.forEach(problem => {
-    typeArray.add(problem["type"]);
-  });
-  typeArray = Array.from(typeArray);
-
   const { getValues, setValue, control } = useForm({
     defaultValues: {
       types: []
     }
   });
-  const { fields, append, remove, insert, update } = useFieldArray(
+  const { fields, append } = useFieldArray(
     {
       control,
       name: `types`,
     }
   );
+
+  // 임시 problems
+  const problems = useMemo(() => {
+    var tempProblems = [
+      {"test-no": "문제 1번", "test-content": "문제내용", "type": "EI", "A":"E", "B":"I"},
+      {"test-no": "문제 2번", "test-content": "문제내용", "type": "JP", "A":"J", "B":"P"},
+      {"test-no": "문제 3번", "test-content": "문제내용", "type": "SN", "A":"S", "B":"N"},
+      {"test-no": "문제 4번", "test-content": "문제내용", "type": "JP", "A":"J", "B":"P"},
+      {"test-no": "문제 5번", "test-content": "문제내용", "type": "EI", "A":"E", "B":"I"},
+      {"test-no": "문제 6번", "test-content": "문제내용", "type": "TF", "A":"T", "B":"F"},
+      {"test-no": "문제 7번", "test-content": "문제내용", "type": "TF", "A":"T", "B":"F"},
+      {"test-no": "문제 8번", "test-content": "문제내용", "type": "SN", "A":"S", "B":"N"},
+      {"test-no": "문제 9번", "test-content": "문제내용", "type": "EI", "A":"E", "B":"I"},
+      {"test-no": "문제 10번", "test-content": "문제내용", "type": "TF", "A":"T", "B":"F"},
+      {"test-no": "문제 11번", "test-content": "문제내용", "type": "JP", "A":"J", "B":"P"},
+      {"test-no": "문제 12번", "test-content": "문제내용", "type": "SN", "A":"S", "B":"N"},
+    ];
+    return tempProblems;
+  }, []);
+
+  const typeArray = useMemo(() => {
+    let _set = new Set();
+    problems.forEach(problem => {
+      _set.add(problem["type"]);
+    });
+    return Array.from(_set);
+  }, [problems])
 
   useEffect(() => {
     if (fields.length < 1) {
@@ -45,7 +50,7 @@ const Test = () => {
         append({name: type, score: 0});
       })
     }
-  }, [fields, append]);
+  }, [append, fields.length, typeArray]);
 
   const problemNum = problems.length;
   const [progress, setProgress] = useState(1);
