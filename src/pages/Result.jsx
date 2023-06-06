@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Button } from 'react-bootstrap';
 import { useNavigate, useLocation } from "react-router-dom";
 import StyledArticle from '../component/Article';
