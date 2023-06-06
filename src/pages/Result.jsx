@@ -85,23 +85,30 @@ function shareFacebook() {
   window.open("http://www.facebook.com/sharer/sharer.php?u=" + sendUrl);
 }
 function shareKakao() {
-  // var sendUrl = getUrl();
+  if (window.Kakao) {
+    const kakao = window.Kakao;
+
+    if (!kakao.isInitialized()) {
+      kakao.init(process.env.REACT_APP_KAKAO_KEY);
+    }
+
+    // 카카오링크 버튼 생성
+    var sendUrl = getUrl();
+    kakao.Link.createDefaultButton({
+      container: '#kakao_image', // 카카오공유버튼ID
+      objectType: 'feed',
+      content: {
+        title: "나는 어떻게 계획을 세우는 타입일까?", // 보여질 제목
+        description: "!! test !!", // 보여질 설명
+        imageUrl: resultImages[resultImg * 1], // 콘텐츠 URL
+        link: {
+          mobileWebUrl: sendUrl,
+          webUrl: sendUrl
+        }
+      }
+    });
+  }
   
-  console.log("?");
-  // 카카오링크 버튼 생성
-  // Kakao.Link.createDefaultButton({
-  //     container: '#kakao_image', // 카카오공유버튼ID
-  //     objectType: 'feed',
-  //     content: {
-  //     title: "나는 어떻게 계획을 세우는 타입일까?", // 보여질 제목
-  //     description: "!! test !!", // 보여질 설명
-  //     imageUrl: resultImages[resultImg * 1 - 1], // 콘텐츠 URL
-  //     link: {
-  //         mobileWebUrl: sendUrl,
-  //         webUrl: sendUrl
-  //     }
-  //     }
-  // });
 }
 function shareUrl() {
   var sendUrl = getUrl();
@@ -146,7 +153,7 @@ function shareUrl() {
         <Icon onClick={shareTwitter}>
           <ShareImage src="/images/icon-twitter.png" alt="" />
         </Icon>
-        <Icon onClick={shareKakao}>
+        <Icon id="kakao_image" onClick={shareKakao}>
           <ShareImage src="/images/icon-kakao.png" alt="" />
         </Icon>
       </StyledDiv>
