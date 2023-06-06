@@ -60,7 +60,14 @@ const Test = () => {
 
     if (progress === problemNum)
     {
-      navigate('/result');
+      var result = "";
+      ["EI", "SN", "TF", "JP"].forEach((state) => {
+        const _score = getValues(`types.${typeArray.indexOf(state)}.score`);
+        result += (_score >= 2) ? "1" : "0";
+      })
+      
+      console.log(`before: ${result}, after: ${parseInt(result, 2)}`);
+      navigate('/result', {"state": {"result": parseInt(result, 2)}});
     }
     else {
       setProgress(progress + 1)

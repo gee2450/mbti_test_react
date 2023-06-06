@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import StyledArticle from '../component/Article';
 import styled from 'styled-components';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -23,25 +23,27 @@ const StyledDiv = styled.div`
 
 const Result = () => {
   // image 확인용 test 숫자
-  const imgTest = 12;
+  const location = useLocation();
+  const resultImg = location.state.result;
+  console.log("result image number", resultImg);
 
   const resultImages = [
-    {"result": "1", "title":"result: 1", "content":"content", "src": "/images/ENFJ.jpg"},
-    {"result": "2", "title":"result: 2", "content":"content", "src": "/images/ENFP.jpg"},
-    {"result": "3", "title":"result: 3", "content":"content", "src": "/images/ENTJ.jpg"},
-    {"result": "4", "title":"result: 4", "content":"content", "src": "/images/ENTP.jpg"},
-    {"result": "5", "title":"result: 5", "content":"content", "src": "/images/ESFJ.jpg"},
-    {"result": "6", "title":"result: 6", "content":"content", "src": "/images/ESFP.jpg"},
-    {"result": "7", "title":"result: 7", "content":"content", "src": "/images/ESTJ.jpg"},
-    {"result": "8", "title":"result: 8", "content":"content", "src": "/images/ESTP.jpg"},
-    {"result": "9", "title":"result: 9", "content":"content", "src": "/images/INFJ.jpg"},
-    {"result": "10", "title":"result: 10", "content":"content",  "src": "/images/INFP.jpg"},
-    {"result": "11", "title":"result: 11", "content":"content", "src": "/images/INTJ.jpg"},
-    {"result": "12", "title":"result: 12", "content":"content", "src": "/images/INTP.jpg"},
-    {"result": "13", "title":"result: 13", "content":"content", "src": "/images/ISFJ.jpg"},
-    {"result": "14", "title":"result: 14", "content":"content", "src": "/images/ISFP.jpg"},
-    {"result": "15", "title":"result: 15", "content":"content", "src": "/images/ISTJ.jpg"},
-    {"result": "16", "title":"result: 16", "content":"content", "src": "/images/ISTP.jpg"},
+    {"result": "0", "title":"result: 0", "content":"content", "src": "/images/ESTJ.jpg"},
+    {"result": "1", "title":"result: 1", "content":"content", "src": "/images/ESTP.jpg"},
+    {"result": "2", "title":"result: 2", "content":"content", "src": "/images/ESFJ.jpg"},
+    {"result": "3", "title":"result: 3", "content":"content", "src": "/images/ESFP.jpg"},
+    {"result": "4", "title":"result: 4", "content":"content", "src": "/images/ENTJ.jpg"},
+    {"result": "5", "title":"result: 5", "content":"content", "src": "/images/ENTP.jpg"},
+    {"result": "6", "title":"result: 6", "content":"content", "src": "/images/ENFJ.jpg"},
+    {"result": "7", "title":"result: 7", "content":"content", "src": "/images/ENFP.jpg"},
+    {"result": "8", "title":"result: 8", "content":"content", "src": "/images/ISTJ.jpg"},
+    {"result": "9", "title":"result: 9", "content":"content",  "src": "/images/ISTP.jpg"},
+    {"result": "10", "title":"result: 10", "content":"content", "src": "/images/ISFJ.jpg"},
+    {"result": "11", "title":"result: 11", "content":"content", "src": "/images/ISFP.jpg"},
+    {"result": "12", "title":"result: 12", "content":"content", "src": "/images/INTJ.jpg"},
+    {"result": "13", "title":"result: 13", "content":"content", "src": "/images/INTP.jpg"},
+    {"result": "14", "title":"result: 14", "content":"content", "src": "/images/INFJ.jpg"},
+    {"result": "15", "title":"result: 15", "content":"content", "src": "/images/INFP.jpg"},
   ]
 
   const navigate = useNavigate();
@@ -81,7 +83,7 @@ function shareKakao() {
   //     content: {
   //     title: "나는 어떻게 계획을 세우는 타입일까?", // 보여질 제목
   //     description: "!! test !!", // 보여질 설명
-  //     imageUrl: resultImages[imgTest * 1 - 1], // 콘텐츠 URL
+  //     imageUrl: resultImages[resultImg * 1 - 1], // 콘텐츠 URL
   //     link: {
   //         mobileWebUrl: sendUrl,
   //         webUrl: sendUrl
@@ -109,7 +111,7 @@ function shareUrl() {
       <h1>Result Page</h1>
       {
         resultImages
-        .filter((content, idx) => idx + 1 === imgTest)
+        .filter((content, idx) => idx === resultImg)
         .map((content, idx) => {
           return (
             <StyledDiv className="content" key={idx}>
