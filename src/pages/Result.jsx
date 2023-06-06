@@ -100,7 +100,7 @@ function shareKakao() {
       content: {
         title: "나는 어떻게 계획을 세우는 타입일까?", // 보여질 제목
         description: "!! test !!", // 보여질 설명
-        imageUrl: resultImages[resultImg * 1], // 콘텐츠 URL
+        imageUrl: resultImages[resultImg * 1]['src'], // 콘텐츠 URL
         link: {
           mobileWebUrl: sendUrl,
           webUrl: sendUrl
