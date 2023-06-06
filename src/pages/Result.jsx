@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import { useNavigate, useLocation } from "react-router-dom";
 import StyledArticle from '../component/Article';
@@ -20,13 +20,25 @@ const ShareImage = styled.img`
 const StyledDiv = styled.div`
   margin-bottom: 10px;
 `
+const Icon = styled.div`
+  margin-bottom: 10px;
+  display: inline;
+`
 
 const Result = () => {
   // image 확인용 test 숫자
+  var resultImg;
   const location = useLocation();
-  const resultImg = location.state.result;
-  console.log("result image number", resultImg);
 
+  if (location.state == null) {
+    resultImg = 0;
+  }
+  else {
+    resultImg = location.state.result;
+  }
+  
+  console.log("result image number", resultImg);
+  
   const resultImages = [
     {"result": "0", "title":"result: 0", "content":"content", "src": "/images/ESTJ.jpg"},
     {"result": "1", "title":"result: 1", "content":"content", "src": "/images/ESTP.jpg"},
@@ -125,18 +137,18 @@ function shareUrl() {
         })
       }
       <StyledDiv>
-        <a href="#!" title="새창" onClick={shareUrl}>
+        <Icon onClick={shareUrl}>
           <ShareImage src="/images/icon-link.png" alt="link" />
-        </a>
-        <a href="#!" onClick={shareFacebook}>
+        </Icon>
+        <Icon onClick={shareFacebook}>
           <ShareImage src="/images/icon-facebook.png" alt="" />
-        </a>
-        <a href="#!" onClick={shareTwitter}>
+        </Icon>
+        <Icon onClick={shareTwitter}>
           <ShareImage src="/images/icon-twitter.png" alt="" />
-        </a>
-        <a href="#!" onClick={shareKakao}>
+        </Icon>
+        <Icon onClick={shareKakao}>
           <ShareImage src="/images/icon-kakao.png" alt="" />
-        </a>
+        </Icon>
       </StyledDiv>
       <StyledDiv className="btn-wrap d-grid gap-2">
         <Button className='btn-test-result' variant="dark" size="lg" onClick={nextPage}>Restart !!!</Button>
