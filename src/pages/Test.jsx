@@ -1,33 +1,73 @@
 import { Button, ProgressBar } from 'react-bootstrap';
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
+import { useForm, useFieldArray } from "react-hook-form";
 import StyledArticle from '../component/Article';
 
 const Test = () => {
   // 임시 problems
   const problems = [
-    {"test-no": "문제 1번", "test-content": "문제내용"},
-    {"test-no": "문제 2번", "test-content": "문제내용"},
-    {"test-no": "문제 3번", "test-content": "문제내용"},
-    {"test-no": "문제 4번", "test-content": "문제내용"},
-    {"test-no": "문제 5번", "test-content": "문제내용"},
-    {"test-no": "문제 6번", "test-content": "문제내용"},
-    {"test-no": "문제 7번", "test-content": "문제내용"},
-    {"test-no": "문제 8번", "test-content": "문제내용"},
-    {"test-no": "문제 9번", "test-content": "문제내용"},
-    {"test-no": "문제 10번", "test-content": "문제내용"},
-    {"test-no": "문제 11번", "test-content": "문제내용"},
-    {"test-no": "문제 12번", "test-content": "문제내용"},
-  ]
+    {"test-no": "문제 1번", "test-content": "문제내용", "type": "EI", "A":"E", "B":"I"},
+    {"test-no": "문제 2번", "test-content": "문제내용", "type": "JP", "A":"J", "B":"P"},
+    {"test-no": "문제 3번", "test-content": "문제내용", "type": "SN", "A":"S", "B":"N"},
+    {"test-no": "문제 4번", "test-content": "문제내용", "type": "JP", "A":"J", "B":"P"},
+    {"test-no": "문제 5번", "test-content": "문제내용", "type": "EI", "A":"E", "B":"I"},
+    {"test-no": "문제 6번", "test-content": "문제내용", "type": "TF", "A":"T", "B":"F"},
+    {"test-no": "문제 7번", "test-content": "문제내용", "type": "TF", "A":"T", "B":"F"},
+    {"test-no": "문제 8번", "test-content": "문제내용", "type": "SN", "A":"S", "B":"N"},
+    {"test-no": "문제 9번", "test-content": "문제내용", "type": "EI", "A":"E", "B":"I"},
+    {"test-no": "문제 10번", "test-content": "문제내용", "type": "TF", "A":"T", "B":"F"},
+    {"test-no": "문제 11번", "test-content": "문제내용", "type": "JP", "A":"J", "B":"P"},
+    {"test-no": "문제 12번", "test-content": "문제내용", "type": "SN", "A":"S", "B":"N"},
+  ];
+
+  var typeArray = new Set();
+  problems.forEach(problem => {
+    typeArray.add(problem["type"]);
+  });
+  typeArray = Array.from(typeArray);
+
+  const { getValues, setValue, control } = useForm({
+    defaultValues: {
+      types: []
+    }
+  });
+  const { fields, append, remove, insert, update } = useFieldArray(
+    {
+      control,
+      name: `types`,
+    }
+  );
+
+  useEffect(() => {
+    if (fields.length < 1) {
+      typeArray.forEach((type) => {
+        append({name: type, score: 0});
+      })
+    }
+  }, [fields, append]);
 
   const problemNum = problems.length;
   const [progress, setProgress] = useState(1);
   const navigate = useNavigate();
 
-  const next = () => {
+  function next(type, state) {
+    if (type.indexOf(state) === 0) {
+      const idx = typeArray.indexOf(type);
+      setValue(`types.${idx}.score`, getValues(`types.${idx}.score`)+1);
+    }
+    console.log(getValues('types'));
+
     if (progress === problemNum)
     {
-      navigate('/result');
+      var result = "";
+      ["EI", "SN", "TF", "JP"].forEach((state) => {
+        const _score = getValues(`types.${typeArray.indexOf(state)}.score`);
+        result += (_score >= 2) ? "1" : "0";
+      })
+      
+      console.log(`before: ${result}, after: ${parseInt(result, 2)}`);
+      navigate('/result', {"state": {"result": parseInt(result, 2)}});
     }
     else {
       setProgress(progress + 1)
@@ -46,13 +86,19 @@ const Test = () => {
             <div key={idx}>
               <h1 className='test-no text-center'>{content["test-no"]}</h1>
               <h3 className='test-content text-center'>{content["test-content"]}</h3>
+              <div className="btn-wrap d-grid gap-2">
+                <Button className='btn-test-start' variant="dark" size="lg" 
+                  onClick={ () => {next(content["type"], content["A"])} }>{content["A"]}</Button>
+                <Button className='btn-test-start' variant="dark" size="lg" 
+                  onClick={ () => {next(content["type"], content["B"])} }>{content["B"]}</Button>
+              </div>
             </div>
           );
         })
       }
-      <div className="btn-wrap d-grid gap-2">
-        <Button className='btn-test-start' variant="dark" size="lg" onClick={next}>Test !!!</Button>
-      </div>
+      {
+
+      }
     </StyledArticle>
   );
 };
