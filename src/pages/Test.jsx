@@ -72,7 +72,7 @@ const Test = () => {
       })
       
       console.log(`before: ${result}, after: ${parseInt(result, 2)}`);
-      navigate('/result', {"state": {"result": parseInt(result, 2)}});
+      navigate(`/result?code=${parseInt(result, 2)}`);
     }
     else {
       setProgress(progress + 1)

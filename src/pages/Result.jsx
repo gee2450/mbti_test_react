@@ -29,12 +29,14 @@ const Result = () => {
   // image 확인용 test 숫자
   var resultImg;
   const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  resultImg = searchParams.get('code');  
 
-  if (location.state == null) {
+  if (resultImg === null) {
     resultImg = 0;
   }
   else {
-    resultImg = location.state.result;
+    resultImg = parseInt(resultImg);
   }
   
   console.log("result image number", resultImg);
