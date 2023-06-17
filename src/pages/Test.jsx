@@ -1,5 +1,5 @@
 import { Button, ProgressBar } from 'react-bootstrap';
-import { React, useState, useEffect, useMemo } from 'react';
+import { React, useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { useForm, useFieldArray } from "react-hook-form";
@@ -34,7 +34,7 @@ const Test = () => {
   
   // get test data and make test-data, types, scores fields
   useEffect(() => {
-    axios('/data/test.json')
+    axios('/data/ko-KR/test.json')
       .then((problems) => {
         if (testFields.length < 1 && problems.data.length != 0) {
           let _typeSet = new Set();
