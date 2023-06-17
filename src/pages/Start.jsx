@@ -21,7 +21,7 @@ const Start = () => {
 
   // get start data from start.json and save in field array
   useEffect(() => {
-    axios('/data/start.json')
+    axios('/data/ko-KR/start.json')
       .then((datas) => {
         setDatas({
           title: datas.data["title"],

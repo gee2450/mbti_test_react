@@ -1,4 +1,4 @@
-import { React, useEffect, useMemo } from 'react';
+import { React, useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from 'axios';
@@ -11,6 +11,7 @@ const ResultImage = styled.img`
   width: 200px;
   height: 200px;
   margin: 0 auto;
+  margin-bottom: 10px;
   display: block;
   border-radius: 70%;
 `
@@ -46,7 +47,7 @@ const Result = () => {
 
   // get results data from result.json and save in field array
   useEffect(() => {
-    axios('/data/results.json')
+    axios('/data/ko-KR/results.json')
       .then((results) => {
         if (fields.length < 1 && results.data.length != 0) {
           results.data.forEach((result) => { append(result); });
@@ -119,7 +120,7 @@ const Result = () => {
       <h1>Result Page</h1>
       {
         watch('resultImages')
-        .filter((content, idx) => idx === resultImg)
+        .filter((_, idx) => idx === resultImg)
         .map((content, idx) => {
           return (
             <StyledDiv className="content" key={idx}>
@@ -147,7 +148,9 @@ const Result = () => {
         </Icon>
       </StyledDiv>
       <StyledDiv className="btn-wrap d-grid gap-2">
-        <Button className='btn-test-result' variant="dark" size="lg" onClick={nextPage}>Restart !!!</Button>
+      <Button className='btn-test-result' variant="dark" size="lg" onClick={nextPage}>
+        Restart !!!
+      </Button>
       </StyledDiv>
     </StyledArticle>
   );
