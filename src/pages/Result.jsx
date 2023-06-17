@@ -35,6 +35,19 @@ const Result = () => {
   const resultImg = parseInt(searchParams.get('code')) || 0; 
   
   // container to get data about result content
+  const [ commonData, setCommonData] = useState({
+    header: "test header",
+    restartButton: "test restart button",
+    "share-content":
+    {
+      link: { "send-text": "" },
+      kakao: {
+        "send-text-title": "",
+        "send-text-description": ""
+      },
+      twitter: { "send-text": "" }
+    }
+  })
   const { watch, control } = useForm({
     defaultValues: { resultImages: [] }
   });
@@ -48,9 +61,19 @@ const Result = () => {
   // get results data from result.json and save in field array
   useEffect(() => {
     axios('/data/ko-KR/results.json')
+    // axios('/data/en-US/results.json')
       .then((results) => {
         if (fields.length < 1 && results.data.length != 0) {
-          results.data.forEach((result) => { append(result); });
+          console.log(results);
+          console.log(results.data.title);
+          setCommonData(
+            {
+              header: results.data.header, 
+              restartButton: results.data["restart-button"],
+              "share-content": results.data["share-content"]
+            })
+          console.log(commonData);
+          results.data["result-data"].forEach((result) => { append(result); });
         }
     });
   }, []);
@@ -65,7 +88,7 @@ const Result = () => {
   }
   // share functions
   function shareTwitter() {
-    var sendText = "test "; // 전달할 텍스트
+    var sendText = commonData['share-content'].twitter['send-text']; // 전달할 텍스트
     var sendUrl = getUrl(); // 전달할 URL
     window.open("https://twitter.com/intent/tweet?text=" + sendText + "&url=" + sendUrl);
     console.log("Twitter finish");
@@ -89,8 +112,8 @@ const Result = () => {
         container: '#kakao_image', // 카카오공유버튼ID
         objectType: 'feed',
         content: {
-          title: "나는 어떻게 계획을 세우는 타입일까?", // 보여질 제목
-          description: "!! test !!", // 보여질 설명
+          title: commonData['share-content'].kakao['send-text-title'], // 보여질 제목
+          description: commonData['share-content'].kakao['send-text-description'], // 보여질 설명
           imageUrl: watch('resultImages')[resultImg * 1]['src'], // 콘텐츠 URL
           link: {
             mobileWebUrl: sendUrl,
@@ -111,13 +134,13 @@ const Result = () => {
     document.execCommand("copy");   // 복사
     document.body.removeChild(textarea); //extarea 요소를 없애줌
         
-    alert("URL이 복사되었습니다.")  // 알림창
+    alert(commonData['share-content'].link['send-text'])  // 알림창
     return sendUrl;
   }
 
   return (
     <StyledArticle>
-      <h1>Result Page</h1>
+      <h1>{commonData.header}</h1>
       {
         watch('resultImages')
         .filter((_, idx) => idx === resultImg)
@@ -135,7 +158,7 @@ const Result = () => {
       }
       <StyledDiv>
         <Icon onClick={shareUrl}>
-          <ShareImage src="/images/icon-link.png" alt="link" />
+          <ShareImage src="/images/icon-link.png" alt="" />
         </Icon>
         <Icon onClick={shareFacebook}>
           <ShareImage src="/images/icon-facebook.png" alt="" />
@@ -148,9 +171,9 @@ const Result = () => {
         </Icon>
       </StyledDiv>
       <StyledDiv className="btn-wrap d-grid gap-2">
-      <Button className='btn-test-result' variant="dark" size="lg" onClick={nextPage}>
-        Restart !!!
-      </Button>
+        <Button className='btn-test-result' variant="dark" size="lg" onClick={nextPage}>
+          {commonData.restartButton}
+        </Button>
       </StyledDiv>
     </StyledArticle>
   );

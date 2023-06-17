@@ -1,98 +1,119 @@
-[
+{
+    "header": "Result Page",
+    "restart-button": "Restart !!!", 
+    "share-content" : 
     {
-        "name": "0",
-        "title": "result: 0",
-        "content": "content",
-        "src": "/images/ESTJ.jpg"
+        "link":
+        {
+            "send-text": "Copy URL to Clipboard."
+        },
+        "kakao": 
+        {
+            "title": "Am I the type to make plans?",
+            "description": "!! description !!"
+        },
+        "twitter":
+        {
+            "send-text": "Am I the type to make plans?"
+        }
     },
-    {
-        "name": "1", 
-        "title":"result: 1", 
-        "content":"content", 
-        "src": "/images/ESTP.jpg"
-    },
-    {
-        "name": "2", 
-        "title":"result: 2", 
-        "content":"content", 
-        "src": "/images/ESFJ.jpg"
-    },
-    {
-        "name": "3", 
-        "title":"result: 3", 
-        "content":"content", 
-        "src": "/images/ESFP.jpg"
-    },
-    {
-        "name": "4", 
-        "title":"result: 4", 
-        "content":"content", 
-        "src": "/images/ENTJ.jpg"
-    },
-    {
-        "name": "5", 
-        "title":"result: 5", 
-        "content":"content", 
-        "src": "/images/ENTP.jpg"
-    },
-    {
-        "name": "6", 
-        "title":"result: 6", 
-        "content":"content", 
-        "src": "/images/ENFJ.jpg"
-    },
-    {
-        "name": "7",
-        "title":"result: 7", 
-        "content":"content", 
-        "src": "/images/ENFP.jpg"
-    },
-    {
-        "name": "8", 
-        "title":"result: 8", 
-        "content":"content", 
-        "src": "/images/ISTJ.jpg"
-    },
-    {
-        "name": "9", 
-        "title":"result: 9", 
-        "content":"content", 
-        "src": "/images/ISTP.jpg"
-    },
-    {
-        "name": "10", 
-        "title":"result: 10", 
-        "content":"content", 
-        "src": "/images/ISFJ.jpg"
-    },
-    {
-        "name": "11", 
-        "title":"result: 11", 
-        "content":"content", 
-        "src": "/images/ISFP.jpg"
-    },
-    {
-        "name": "12", 
-        "title":"result: 12", 
-        "content":"content", 
-        "src": "/images/INTJ.jpg"
-    },
-    {
-        "name": "13", 
-        "title":"result: 13", 
-        "content":"content", 
-        "src": "/images/INTP.jpg"
-    },
-    {
-        "name": "14",
-        "title":"result: 14", 
-        "content":"content", 
-        "src": "/images/INFJ.jpg"
-    },
-    {
-        "name": "15", 
-        "title":"result: 15", 
-        "content":"content", 
-        "src": "/images/INFP.jpg"
-    }
-]
+    "result-data" : 
+    [
+        {
+            "name": "0",
+            "title": "result: 0",
+            "content": "content",
+            "src": "/images/ESTJ.jpg"
+        },
+        {
+            "name": "1", 
+            "title": "result: 1", 
+            "content": "content", 
+            "src": "/images/ESTP.jpg"
+        },
+        {
+            "name": "2", 
+            "title": "result: 2", 
+            "content": "content", 
+            "src": "/images/ESFJ.jpg"
+        },
+        {
+            "name": "3", 
+            "title": "result: 3", 
+            "content": "content", 
+            "src": "/images/ESFP.jpg"
+        },
+        {
+            "name": "4", 
+            "title": "result: 4", 
+            "content": "content", 
+            "src": "/images/ENTJ.jpg"
+        },
+        {
+            "name": "5", 
+            "title": "result: 5", 
+            "content": "content", 
+            "src": "/images/ENTP.jpg"
+        },
+        {
+            "name": "6", 
+            "title": "result: 6", 
+            "content": "content", 
+            "src": "/images/ENFJ.jpg"
+        },
+        {
+            "name": "7",
+            "title": "result: 7", 
+            "content": "content", 
+            "src": "/images/ENFP.jpg"
+        },
+        {
+            "name": "8", 
+            "title": "result: 8", 
+            "content": "content", 
+            "src": "/images/ISTJ.jpg"
+        },
+        {
+            "name": "9", 
+            "title": "result: 9", 
+            "content": "content", 
+            "src": "/images/ISTP.jpg"
+        },
+        {
+            "name": "10", 
+            "title": "result: 10", 
+            "content": "content", 
+            "src": "/images/ISFJ.jpg"
+        },
+        {
+            "name": "11", 
+            "title": "result: 11", 
+            "content": "content", 
+            "src": "/images/ISFP.jpg"
+        },
+        {
+            "name": "12", 
+            "title": "result: 12", 
+            "content": "content", 
+            "src": "/images/INTJ.jpg"
+        },
+        {
+            "name": "13", 
+            "title": "result: 13", 
+            "content": "content", 
+            "src": "/images/INTP.jpg"
+        },
+        {
+            "name": "14",
+            "title": "result: 14", 
+            "content": "content", 
+            "src": "/images/INFJ.jpg"
+        },
+        {
+            "name": "15", 
+            "title": "result: 15", 
+            "content": "content", 
+            "src": "/images/INFP.jpg"
+        }
+    ]
+}
