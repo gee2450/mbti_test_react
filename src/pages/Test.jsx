@@ -1,73 +1,76 @@
 import { Button, ProgressBar } from 'react-bootstrap';
 import { React, useState, useEffect, useMemo } from 'react';
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 import { useForm, useFieldArray } from "react-hook-form";
 import StyledArticle from '../component/Article';
 
 const Test = () => {
-  const { getValues, setValue, control } = useForm({
+  const { watch ,setValue, control } = useForm({
     defaultValues: {
-      types: []
+      types: [],
+      scores: [],
+      tests: []
     }
   });
-  const { fields, append } = useFieldArray(
+  const { append: typeAppend } = useFieldArray(
     {
       control,
       name: `types`,
     }
   );
+  const { append: scoreAppend } = useFieldArray(
+    {
+      control,
+      name: `scores`,
+    }
+  );
+  const { fields: testFields, append: testAppend } = useFieldArray(
+    {
+      control,
+      name: `tests`,
+    }
+  );
+  
+  // get test data and make test-data, types, scores fields
+  useEffect(() => {
+    axios('/data/test.json')
+      .then((problems) => {
+        if (testFields.length < 1 && problems.data.length != 0) {
+          let _typeSet = new Set();
 
-  // 임시 problems
-  const problems = useMemo(() => {
-    var tempProblems = [
-      {"test-no": "문제 1번", "test-content": "문제내용", "type": "EI", "A":"E", "B":"I"},
-      {"test-no": "문제 2번", "test-content": "문제내용", "type": "JP", "A":"J", "B":"P"},
-      {"test-no": "문제 3번", "test-content": "문제내용", "type": "SN", "A":"S", "B":"N"},
-      {"test-no": "문제 4번", "test-content": "문제내용", "type": "JP", "A":"J", "B":"P"},
-      {"test-no": "문제 5번", "test-content": "문제내용", "type": "EI", "A":"E", "B":"I"},
-      {"test-no": "문제 6번", "test-content": "문제내용", "type": "TF", "A":"T", "B":"F"},
-      {"test-no": "문제 7번", "test-content": "문제내용", "type": "TF", "A":"T", "B":"F"},
-      {"test-no": "문제 8번", "test-content": "문제내용", "type": "SN", "A":"S", "B":"N"},
-      {"test-no": "문제 9번", "test-content": "문제내용", "type": "EI", "A":"E", "B":"I"},
-      {"test-no": "문제 10번", "test-content": "문제내용", "type": "TF", "A":"T", "B":"F"},
-      {"test-no": "문제 11번", "test-content": "문제내용", "type": "JP", "A":"J", "B":"P"},
-      {"test-no": "문제 12번", "test-content": "문제내용", "type": "SN", "A":"S", "B":"N"},
-    ];
-    return tempProblems;
+          problems.data.forEach((problem) => {
+            testAppend(problem);
+            _typeSet.add(problem["type"]);
+          });
+
+          const typeArray = Array.from(_typeSet);
+
+          typeArray.forEach((type) => {
+            typeAppend(type);
+            scoreAppend({name: type, score: 0});
+          });
+        }
+    });
   }, []);
 
-  const typeArray = useMemo(() => {
-    let _set = new Set();
-    problems.forEach(problem => {
-      _set.add(problem["type"]);
-    });
-    return Array.from(_set);
-  }, [problems])
-
-  useEffect(() => {
-    if (fields.length < 1) {
-      typeArray.forEach((type) => {
-        append({name: type, score: 0});
-      })
-    }
-  }, [append, fields.length, typeArray]);
-
-  const problemNum = problems.length;
+  // button click method
+  const problemNum = testFields.length;
   const [progress, setProgress] = useState(1);
   const navigate = useNavigate();
 
   function next(type, state) {
     if (type.indexOf(state) === 0) {
-      const idx = typeArray.indexOf(type);
-      setValue(`types.${idx}.score`, getValues(`types.${idx}.score`)+1);
+      const idx = watch('types').indexOf(type);
+      setValue(`scores.${idx}.score`, watch(`scores.${idx}.score`)+1);
     }
-    console.log(getValues('types'));
+    console.log(watch(`scores`));
 
     if (progress === problemNum)
     {
       var result = "";
       ["EI", "SN", "TF", "JP"].forEach((state) => {
-        const _score = getValues(`types.${typeArray.indexOf(state)}.score`);
+        const _score = watch(`types.${watch('types').indexOf(state)}.score`);
         result += (_score >= 2) ? "1" : "0";
       })
       
@@ -84,17 +87,17 @@ const Test = () => {
       <ProgressBar variant="warning" now={100 / problemNum * progress}></ProgressBar>
       <h4>{progress}</h4>
       {
-        problems
-        .filter((content, idx) => progress === idx + 1)
+        watch('tests')
+        .filter((_, idx) => progress === idx + 1)
         .map((content, idx) => {
           return(
             <div key={idx}>
-              <h1 className='test-no text-center'>{content["test-no"]}</h1>
-              <h3 className='test-content text-center'>{content["test-content"]}</h3>
+              <h1 className='test-name text-center'>{content["name"]}</h1>
+              <h3 className='test-content text-center'>{content["content"]}</h3>
               <div className="btn-wrap d-grid gap-2">
-                <Button className='btn-test-start' variant="dark" size="lg" 
+                <Button className='test-btn-A' variant="dark" size="lg" 
                   onClick={ () => {next(content["type"], content["A"])} }>{content["A"]}</Button>
-                <Button className='btn-test-start' variant="dark" size="lg" 
+                <Button className='test-btn-B' variant="dark" size="lg" 
                   onClick={ () => {next(content["type"], content["B"])} }>{content["B"]}</Button>
               </div>
             </div>
