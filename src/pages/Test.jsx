@@ -5,7 +5,7 @@ import { useForm, useFieldArray } from "react-hook-form";
 import StyledArticle from '../component/Article';
 
 const Test = () => {
-  const { getValues, setValue, control } = useForm({
+  const { watch ,setValue, control } = useForm({
     defaultValues: {
       types: []
     }
@@ -16,7 +16,7 @@ const Test = () => {
       name: `types`,
     }
   );
-
+  
   // 임시 problems
   const problems = useMemo(() => {
     var tempProblems = [
@@ -59,15 +59,16 @@ const Test = () => {
   function next(type, state) {
     if (type.indexOf(state) === 0) {
       const idx = typeArray.indexOf(type);
-      setValue(`types.${idx}.score`, getValues(`types.${idx}.score`)+1);
+      setValue(`types.${idx}.score`, watch(`types.${idx}.score`)+1);
     }
-    console.log(getValues('types'));
+    console.log("get values");
+    console.log(watch(`types`));
 
     if (progress === problemNum)
     {
       var result = "";
       ["EI", "SN", "TF", "JP"].forEach((state) => {
-        const _score = getValues(`types.${typeArray.indexOf(state)}.score`);
+        const _score = watch(`types.${typeArray.indexOf(state)}.score`);
         result += (_score >= 2) ? "1" : "0";
       })
       

@@ -34,7 +34,7 @@ const Result = () => {
   const resultImg = parseInt(searchParams.get('code')) || 0; 
   
   // container to get data about result content
-  const { getValues, control } = useForm({
+  const { watch, control } = useForm({
     defaultValues: { resultImages: [] }
   });
   const { fields, append } = useFieldArray(
@@ -90,7 +90,7 @@ const Result = () => {
         content: {
           title: "나는 어떻게 계획을 세우는 타입일까?", // 보여질 제목
           description: "!! test !!", // 보여질 설명
-          imageUrl: getValues('resultImages')[resultImg * 1]['src'], // 콘텐츠 URL
+          imageUrl: watch('resultImages')[resultImg * 1]['src'], // 콘텐츠 URL
           link: {
             mobileWebUrl: sendUrl,
             webUrl: sendUrl
@@ -118,7 +118,7 @@ const Result = () => {
     <StyledArticle>
       <h1>Result Page</h1>
       {
-        getValues('resultImages')
+        watch('resultImages')
         .filter((content, idx) => idx === resultImg)
         .map((content, idx) => {
           return (
