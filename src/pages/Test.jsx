@@ -2,76 +2,47 @@ import { Button, ProgressBar } from 'react-bootstrap';
 import { React, useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
-import { useForm, useFieldArray } from "react-hook-form";
 import StyledArticle from '../component/Article';
 
 const Test = () => {
-  const { watch ,setValue, control } = useForm({
-    defaultValues: {
-      types: [],
-      scores: [],
-      tests: []
-    }
+  const [ data, setData ] = useState({
+    types: ["EI", "SN", "TF", "JP"],
+    scores: 
+    {
+      "EI": 0, 
+      "SN": 0, 
+      "TF": 0, 
+      "JP": 0
+    },
+    tests: []
   });
-  const { append: typeAppend } = useFieldArray(
-    {
-      control,
-      name: `types`,
-    }
-  );
-  const { append: scoreAppend } = useFieldArray(
-    {
-      control,
-      name: `scores`,
-    }
-  );
-  const { fields: testFields, append: testAppend } = useFieldArray(
-    {
-      control,
-      name: `tests`,
-    }
-  );
-  
+
   // get test data and make test-data, types, scores fields
   useEffect(() => {
     axios('/data/ko-KR/test.json')
       .then((problems) => {
-        if (testFields.length < 1 && problems.data.length != 0) {
-          let _typeSet = new Set();
-
-          problems.data.forEach((problem) => {
-            testAppend(problem);
-            _typeSet.add(problem["type"]);
-          });
-
-          const typeArray = Array.from(_typeSet);
-
-          typeArray.forEach((type) => {
-            typeAppend(type);
-            scoreAppend({name: type, score: 0});
-          });
+        if (problems.data.length !== 0) {
+          setData(prev => ({...prev, tests: problems.data}));
         }
     });
   }, []);
 
   // button click method
-  const problemNum = testFields.length;
+  const problemNum = data.tests.length;
   const [progress, setProgress] = useState(1);
   const navigate = useNavigate();
 
   function next(type, state) {
     if (type.indexOf(state) === 0) {
-      const idx = watch('types').indexOf(type);
-      setValue(`scores.${idx}.score`, watch(`scores.${idx}.score`)+1);
+      setData(prev => ({...prev, scores: {...prev.scores, [type]: prev.scores[type] + 1}}));
     }
-    console.log(watch(`scores`));
 
     if (progress === problemNum)
     {
       var result = "";
       ["EI", "SN", "TF", "JP"].forEach((state) => {
-        const _score = watch(`types.${watch('types').indexOf(state)}.score`);
-        result += (_score >= 2) ? "1" : "0";
+        const _score = data.scores[state];
+        result += (_score >= 2) ? "0" : "1";
       })
       
       console.log(`before: ${result}, after: ${parseInt(result, 2)}`);
@@ -87,7 +58,7 @@ const Test = () => {
       <ProgressBar variant="warning" now={100 / problemNum * progress}></ProgressBar>
       <h4>{progress}</h4>
       {
-        watch('tests')
+        data.tests
         .filter((_, idx) => progress === idx + 1)
         .map((content, idx) => {
           return(

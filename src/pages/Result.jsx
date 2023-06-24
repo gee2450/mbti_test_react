@@ -2,10 +2,10 @@ import { React, useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from 'axios';
-import { useForm, useFieldArray } from "react-hook-form";
 import StyledArticle from '../component/Article';
 import styled from 'styled-components';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { ResultWindowContents as Data } from '../component/ResultWindowContents';
 
 const ResultImage = styled.img`
   width: 200px;
@@ -35,22 +35,18 @@ const Result = () => {
   const resultImg = parseInt(searchParams.get('code')) || 0; 
   
   // container to get data about result content
-  const { watch, control } = useForm({
-    defaultValues: { resultImages: [] }
-  });
-  const { fields, append } = useFieldArray(
-    {
-      control,
-      name: 'resultImages',
-    }
-  );
+  // all testers can see this contents
+  const [ data, setData ] = useState(Data)
 
   // get results data from result.json and save in field array
   useEffect(() => {
     axios('/data/ko-KR/results.json')
+    // axios('/data/en-US/results.json')
       .then((results) => {
-        if (fields.length < 1 && results.data.length != 0) {
-          results.data.forEach((result) => { append(result); });
+        if (results.data.length !== 0) {
+          for (const name in results.data) {
+            setData(prev => ({...prev, [name]: results.data[name]}));
+          }
         }
     });
   }, []);
@@ -65,14 +61,12 @@ const Result = () => {
   }
   // share functions
   function shareTwitter() {
-    var sendText = "test "; // 전달할 텍스트
+    var sendText = data['share-content'].twitter['send-text']; // 전달할 텍스트
     var sendUrl = getUrl(); // 전달할 URL
     window.open("https://twitter.com/intent/tweet?text=" + sendText + "&url=" + sendUrl);
-    console.log("Twitter finish");
   }
   function shareFacebook() {
     var sendUrl = getUrl(); // 전달할 URL
-    console.log("http://www.facebook.com/sharer/sharer.php?u=" + sendUrl);
     window.open("http://www.facebook.com/sharer/sharer.php?u=" + sendUrl);
   }
   function shareKakao() {
@@ -89,9 +83,9 @@ const Result = () => {
         container: '#kakao_image', // 카카오공유버튼ID
         objectType: 'feed',
         content: {
-          title: "나는 어떻게 계획을 세우는 타입일까?", // 보여질 제목
-          description: "!! test !!", // 보여질 설명
-          imageUrl: watch('resultImages')[resultImg * 1]['src'], // 콘텐츠 URL
+          title: data['share-content'].kakao['send-text-title'], // 보여질 제목
+          description: data['share-content'].kakao['send-text-description'], // 보여질 설명
+          imageUrl: data['result-data'][resultImg * 1]['src'], // 콘텐츠 URL
           link: {
             mobileWebUrl: sendUrl,
             webUrl: sendUrl
@@ -111,15 +105,15 @@ const Result = () => {
     document.execCommand("copy");   // 복사
     document.body.removeChild(textarea); //extarea 요소를 없애줌
         
-    alert("URL이 복사되었습니다.")  // 알림창
+    alert(data['shareContent'].link['send-text'])  // 알림창
     return sendUrl;
   }
 
   return (
     <StyledArticle>
-      <h1>Result Page</h1>
+      <h1>{data.header}</h1>
       {
-        watch('resultImages')
+        data['result-data']
         .filter((_, idx) => idx === resultImg)
         .map((content, idx) => {
           return (
@@ -133,24 +127,27 @@ const Result = () => {
           );
         })
       }
+      {
+          console.log(data)
+      }
       <StyledDiv>
         <Icon onClick={shareUrl}>
-          <ShareImage src="/images/icon-link.png" alt="link" />
+          <ShareImage src={data['share-image-url'].link} alt="" />
         </Icon>
         <Icon onClick={shareFacebook}>
-          <ShareImage src="/images/icon-facebook.png" alt="" />
+          <ShareImage src={data['share-image-url'].facebook} alt="" />
         </Icon>
         <Icon onClick={shareTwitter}>
-          <ShareImage src="/images/icon-twitter.png" alt="" />
+          <ShareImage src={data['share-image-url'].twitter} alt="" />
         </Icon>
         <Icon id="kakao_image" onClick={shareKakao}>
-          <ShareImage src="/images/icon-kakao.png" alt="" />
+          <ShareImage src={data['share-image-url'].kakao} alt="" />
         </Icon>
       </StyledDiv>
       <StyledDiv className="btn-wrap d-grid gap-2">
-      <Button className='btn-test-result' variant="dark" size="lg" onClick={nextPage}>
-        Restart !!!
-      </Button>
+        <Button className='btn-test-result' variant="dark" size="lg" onClick={nextPage}>
+          {data["restart-button"]}
+        </Button>
       </StyledDiv>
     </StyledArticle>
   );

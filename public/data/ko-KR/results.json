@@ -1,98 +1,126 @@
-[
+{
+    "header": "결과창",
+    "restart-button": "테스트 다시하기 !!!", 
+    "share-image-url" : 
     {
-        "name": "0",
-        "title": "결과: 0, ESTJ",
-        "content": "content",
-        "src": "/images/ESTJ.jpg"
+        "link": "/images/icon-link.png",
+        "kakao": "/images/icon-kakao.png",
+        "twitter": "/images/icon-twitter.png",
+        "facebook": "/images/icon-facebook.png"
     },
+    "share-content" : 
     {
-        "name": "1", 
-        "title":"결과: 1, ESTP", 
-        "content":"내용", 
-        "src": "/images/ESTP.jpg"
+        "link":
+        {
+            "send-text": "URL이 복사되었습니다."
+        },
+        "kakao": 
+        {
+            "title": "나는 어떻게 계획을 세우는 타입일까?",
+            "description": "!! 설명 !!"
+        },
+        "twitter":
+        {
+            "send-text": "나는 어떻게 계획을 세우는 타입일까?"
+        }
     },
-    {
-        "name": "2", 
-        "title":"결과: 2, ESFJ", 
-        "content":"내용", 
-        "src": "/images/ESFJ.jpg"
-    },
-    {
-        "name": "3", 
-        "title":"결과: 3, ESFP", 
-        "content":"내용", 
-        "src": "/images/ESFP.jpg"
-    },
-    {
-        "name": "4", 
-        "title":"결과: 4, ENTJ", 
-        "content":"내용", 
-        "src": "/images/ENTJ.jpg"
-    },
-    {
-        "name": "5", 
-        "title":"결과: 5, ENTP", 
-        "content":"내용", 
-        "src": "/images/ENTP.jpg"
-    },
-    {
-        "name": "6", 
-        "title":"결과: 6, ENFJ", 
-        "content":"내용", 
-        "src": "/images/ENFJ.jpg"
-    },
-    {
-        "name": "7",
-        "title":"결과: 7, ENFP", 
-        "content":"내용", 
-        "src": "/images/ENFP.jpg"
-    },
-    {
-        "name": "8", 
-        "title":"결과: 8, ISTJ", 
-        "content":"내용", 
-        "src": "/images/ISTJ.jpg"
-    },
-    {
-        "name": "9", 
-        "title":"결과: 9, ISTP", 
-        "content":"내용", 
-        "src": "/images/ISTP.jpg"
-    },
-    {
-        "name": "10", 
-        "title":"결과: 10, ISFJ", 
-        "content":"내용", 
-        "src": "/images/ISFJ.jpg"
-    },
-    {
-        "name": "11", 
-        "title":"결과: 11, ISFP", 
-        "content":"내용", 
-        "src": "/images/ISFP.jpg"
-    },
-    {
-        "name": "12", 
-        "title":"결과: 12, INTJ", 
-        "content":"내용", 
-        "src": "/images/INTJ.jpg"
-    },
-    {
-        "name": "13", 
-        "title":"결과: 13, INTP", 
-        "content":"내용", 
-        "src": "/images/INTP.jpg"
-    },
-    {
-        "name": "14",
-        "title":"결과: 14, INFJ", 
-        "content":"내용", 
-        "src": "/images/INFJ.jpg"
-    },
-    {
-        "name": "15", 
-        "title":"결과: 15, INFP", 
-        "content":"내용", 
-        "src": "/images/INFP.jpg"
-    }
-]
+    "result-data": 
+    [
+        {
+            "name": "0",
+            "title": "결과: 0, ESTJ",
+            "content": "내용",
+            "src": "/images/ESTJ.jpg"
+        },
+        {
+            "name": "1", 
+            "title": "결과: 1, ESTP", 
+            "content": "내용", 
+            "src": "/images/ESTP.jpg"
+        },
+        {
+            "name": "2", 
+            "title": "결과: 2, ESFJ", 
+            "content": "내용", 
+            "src": "/images/ESFJ.jpg"
+        },
+        {
+            "name": "3", 
+            "title": "결과: 3, ESFP", 
+            "content": "내용", 
+            "src": "/images/ESFP.jpg"
+        },
+        {
+            "name": "4", 
+            "title": "결과: 4, ENTJ", 
+            "content": "내용", 
+            "src": "/images/ENTJ.jpg"
+        },
+        {
+            "name": "5", 
+            "title": "결과: 5, ENTP", 
+            "content": "내용", 
+            "src": "/images/ENTP.jpg"
+        },
+        {
+            "name": "6", 
+            "title": "결과: 6, ENFJ", 
+            "content": "내용", 
+            "src": "/images/ENFJ.jpg"
+        },
+        {
+            "name": "7",
+            "title": "결과: 7, ENFP", 
+            "content": "내용", 
+            "src": "/images/ENFP.jpg"
+        },
+        {
+            "name": "8", 
+            "title": "결과: 8, ISTJ", 
+            "content": "내용", 
+            "src": "/images/ISTJ.jpg"
+        },
+        {
+            "name": "9", 
+            "title": "결과: 9, ISTP", 
+            "content": "내용", 
+            "src": "/images/ISTP.jpg"
+        },
+        {
+            "name": "10", 
+            "title": "결과: 10, ISFJ", 
+            "content": "내용", 
+            "src": "/images/ISFJ.jpg"
+        },
+        {
+            "name": "11", 
+            "title": "결과: 11, ISFP", 
+            "content": "내용", 
+            "src": "/images/ISFP.jpg"
+        },
+        {
+            "name": "12", 
+            "title": "결과: 12, INTJ", 
+            "content": "내용", 
+            "src": "/images/INTJ.jpg"
+        },
+        {
+            "name": "13", 
+            "title": "결과: 13, INTP", 
+            "content": "내용", 
+            "src": "/images/INTP.jpg"
+        },
+        {
+            "name": "14",
+            "title": "결과: 14, INFJ", 
+            "content": "내용", 
+            "src": "/images/INFJ.jpg"
+        },
+        {
+            "name": "15", 
+            "title": "결과: 15, INFP", 
+            "content": "내용", 
+            "src": "/images/INFP.jpg"
+        }
+    ]
+}
