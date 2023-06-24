@@ -20,6 +20,7 @@ const Test = () => {
   // get test data and make test-data, types, scores fields
   useEffect(() => {
     axios('/data/ko-KR/test.json')
+    // axios('/data/en-US/test.json')
       .then((problems) => {
         if (problems.data.length !== 0) {
           setData(prev => ({...prev, tests: problems.data}));

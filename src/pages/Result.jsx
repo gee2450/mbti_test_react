@@ -40,8 +40,8 @@ const Result = () => {
 
   // get results data from result.json and save in field array
   useEffect(() => {
-    axios('/data/ko-KR/results.json')
-    // axios('/data/en-US/results.json')
+    axios('/data/ko-KR/result.json')
+    // axios('/data/en-US/result.json')
       .then((results) => {
         if (results.data.length !== 0) {
           for (const name in results.data) {
@@ -105,7 +105,7 @@ const Result = () => {
     document.execCommand("copy");   // 복사
     document.body.removeChild(textarea); //extarea 요소를 없애줌
         
-    alert(data['shareContent'].link['send-text'])  // 알림창
+    alert(data['share-content'].link['send-text'])  // 알림창
     return sendUrl;
   }
 
@@ -126,9 +126,6 @@ const Result = () => {
             </StyledDiv>
           );
         })
-      }
-      {
-          console.log(data)
       }
       <StyledDiv>
         <Icon onClick={shareUrl}>

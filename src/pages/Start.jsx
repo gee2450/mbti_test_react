@@ -20,6 +20,7 @@ const Start = () => {
   // get start data from start.json and save in field array
   useEffect(() => {
     axios('/data/ko-KR/start.json')
+    // axios('/data/en-US/start.json')
       .then((datas) => {
         for (const name in datas.data) {
           setData(prev => ({...prev, [name]: datas.data[name]}))

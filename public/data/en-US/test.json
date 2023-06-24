@@ -1,83 +1,83 @@
 [
     {
-        "name":"Test 1번",
+        "name":"Test 1",
         "content":"No 1. question",
         "type":"EI",
         "A":"E",
         "B":"I"
     },
     {
-        "name":"Test 2번",
+        "name":"Test 2",
         "content":"No 2. question",
         "type":"JP",
         "A":"J",
         "B":"P"
     },
     {
-        "name":"Test 3번",
+        "name":"Test 3",
         "content":"No 3. question",
         "type":"SN",
         "A":"S",
         "B":"N"
     },
     {
-        "name":"Test 4번",
+        "name":"Test 4",
         "content":"No 4. question",
         "type":"JP",
         "A":"J",
         "B":"P"
     },
     {
-        "name":"Test 5번",
+        "name":"Test 5",
         "content":"No 5. question",
         "type":"EI",
         "A":"E",
         "B":"I"
     },
     {
-        "name":"Test 6번",
+        "name":"Test 6",
         "content":"No 6. question",
         "type":"TF",
         "A":"T",
         "B":"F"
     },
     {
-        "name":"Test 7번",
+        "name":"Test 7",
         "content":"No 7. question",
         "type":"TF",
         "A":"T",
         "B":"F"
     },
     {
-        "name":"Test 8번",
+        "name":"Test 8",
         "content":"No 8. question",
         "type":"SN",
         "A":"S",
         "B":"N"
     },
     {
-        "name":"Test 9번",
+        "name":"Test 9",
         "content":"No 9. question",
         "type":"EI",
         "A":"E",
         "B":"I"
     },
     {
-        "name":"Test 10번",
+        "name":"Test 10",
         "content":"No 10. question",
         "type":"TF",
         "A":"T",
         "B":"F"
     },
     {
-        "name":"Test 11번",
+        "name":"Test 11",
         "content":"No 11. question",
         "type":"JP",
         "A":"J",
         "B":"P"
     },
     {
-        "name":"Test 12번",
+        "name":"Test 12",
         "content":"No 12. question",
         "type":"SN",
         "A":"S",
