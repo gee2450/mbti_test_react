@@ -1,6 +1,13 @@
 {
     "header": "결과창",
     "restart-button": "테스트 다시하기 !!!", 
+    "share-image-url" : 
+    {
+        "link": "/images/icon-link.png",
+        "kakao": "/images/icon-kakao.png",
+        "twitter": "/images/icon-twitter.png",
+        "facebook": "/images/icon-facebook.png"
+    },
     "share-content" : 
     {
         "link":
