@@ -1,4 +1,6 @@
 {
+    "namespace": "start",
+    "lng": "en",
     "title": "Title",
     "intro": "Intro",
     "btn-test-start": "Start !!!"
