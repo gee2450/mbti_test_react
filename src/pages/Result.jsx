@@ -113,9 +113,6 @@ const Result = () => {
           );
         })
       }
-      {
-          console.log(data)
-      }
       <StyledDiv>
         <Icon onClick={shareUrl}>
           <ShareImage src={t('result')['share-image-url'].link} alt="" />
