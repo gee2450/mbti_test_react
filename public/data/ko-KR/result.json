@@ -18,8 +18,8 @@
         },
         "kakao": 
         {
-            "title": "나는 어떻게 계획을 세우는 타입일까?",
-            "description": "!! 설명 !!"
+            "send-text-title": "나는 어떻게 계획을 세우는 타입일까?",
+            "send-text-description": "!! 설명 !!"
         },
         "twitter":
         {

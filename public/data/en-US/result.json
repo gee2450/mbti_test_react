@@ -18,8 +18,8 @@
         },
         "kakao": 
         {
-            "title": "Am I the type to make plans?",
-            "description": "!! description !!"
+            "send-text-title": "Am I the type to make plans?",
+            "send-text-description": "!! description !!"
         },
         "twitter":
         {
