@@ -1,86 +1,90 @@
-[
-    {
-        "name":"문제 1번",
-        "content":"문제내용",
-        "type":"EI",
-        "A":"E",
-        "B":"I"
-    },
-    {
-        "name":"문제 2번",
-        "content":"문제내용",
-        "type":"JP",
-        "A":"J",
-        "B":"P"
-    },
-    {
-        "name":"문제 3번",
-        "content":"문제내용",
-        "type":"SN",
-        "A":"S",
-        "B":"N"
-    },
-    {
-        "name":"문제 4번",
-        "content":"문제내용",
-        "type":"JP",
-        "A":"J",
-        "B":"P"
-    },
-    {
-        "name":"문제 5번",
-        "content":"문제내용",
-        "type":"EI",
-        "A":"E",
-        "B":"I"
-    },
-    {
-        "name":"문제 6번",
-        "content":"문제내용",
-        "type":"TF",
-        "A":"T",
-        "B":"F"
-    },
-    {
-        "name":"문제 7번",
-        "content":"문제내용",
-        "type":"TF",
-        "A":"T",
-        "B":"F"
-    },
-    {
-        "name":"문제 8번",
-        "content":"문제내용",
-        "type":"SN",
-        "A":"S",
-        "B":"N"
-    },
-    {
-        "name":"문제 9번",
-        "content":"문제내용",
-        "type":"EI",
-        "A":"E",
-        "B":"I"
-    },
-    {
-        "name":"문제 10번",
-        "content":"문제내용",
-        "type":"TF",
-        "A":"T",
-        "B":"F"
-    },
-    {
-        "name":"문제 11번",
-        "content":"문제내용",
-        "type":"JP",
-        "A":"J",
-        "B":"P"
-    },
-    {
-        "name":"문제 12번",
-        "content":"문제내용",
-        "type":"SN",
-        "A":"S",
-        "B":"N"
-    }
-]
+{
+    "namespace": "test",
+    "lng": "ko",
+    "data": [
+        {
+            "name":"문제 1번",
+            "content":"문제내용",
+            "type":"EI",
+            "A":"E",
+            "B":"I"
+        },
+        {
+            "name":"문제 2번",
+            "content":"문제내용",
+            "type":"JP",
+            "A":"J",
+            "B":"P"
+        },
+        {
+            "name":"문제 3번",
+            "content":"문제내용",
+            "type":"SN",
+            "A":"S",
+            "B":"N"
+        },
+        {
+            "name":"문제 4번",
+            "content":"문제내용",
+            "type":"JP",
+            "A":"J",
+            "B":"P"
+        },
+        {
+            "name":"문제 5번",
+            "content":"문제내용",
+            "type":"EI",
+            "A":"E",
+            "B":"I"
+        },
+        {
+            "name":"문제 6번",
+            "content":"문제내용",
+            "type":"TF",
+            "A":"T",
+            "B":"F"
+        },
+        {
+            "name":"문제 7번",
+            "content":"문제내용",
+            "type":"TF",
+            "A":"T",
+            "B":"F"
+        },
+        {
+            "name":"문제 8번",
+            "content":"문제내용",
+            "type":"SN",
+            "A":"S",
+            "B":"N"
+        },
+        {
+            "name":"문제 9번",
+            "content":"문제내용",
+            "type":"EI",
+            "A":"E",
+            "B":"I"
+        },
+        {
+            "name":"문제 10번",
+            "content":"문제내용",
+            "type":"TF",
+            "A":"T",
+            "B":"F"
+        },
+        {
+            "name":"문제 11번",
+            "content":"문제내용",
+            "type":"JP",
+            "A":"J",
+            "B":"P"
+        },
+        {
+            "name":"문제 12번",
+            "content":"문제내용",
+            "type":"SN",
+            "A":"S",
+            "B":"N"
+        }
+    ]
+}

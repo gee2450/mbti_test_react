@@ -1,4 +1,6 @@
 {
+    "namespace": "result",
+    "lng": "en",
     "header": "Result Page",
     "restart-button": "Restart !!!", 
     "share-image-url" : 

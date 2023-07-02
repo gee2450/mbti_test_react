@@ -1,4 +1,6 @@
 {
+    "namespace": "result",
+    "lng": "ko",
     "header": "결과창",
     "restart-button": "테스트 다시하기 !!!", 
     "share-image-url" : 
