@@ -46,6 +46,7 @@ const Result = () => {
   // share functions
   function shareTwitter() {
     var sendText = t('result')['share-content'].twitter['send-text']; // 전달할 텍스트
+
     var sendUrl = getUrl(); // 전달할 URL
     window.open("https://twitter.com/intent/tweet?text=" + sendText + "&url=" + sendUrl);
   }
@@ -70,6 +71,7 @@ const Result = () => {
           title: t('result')['share-content'].kakao['send-text-title'], // 보여질 제목
           description: t('result')['share-content'].kakao['send-text-description'], // 보여질 설명
           imageUrl: t('result')['result-data'][resultImg * 1]['src'], // 콘텐츠 URL
+
           link: {
             mobileWebUrl: sendUrl,
             webUrl: sendUrl
@@ -111,6 +113,9 @@ const Result = () => {
           );
         })
       }
+      {
+          console.log(data)
+      }
       <StyledDiv>
         <Icon onClick={shareUrl}>
           <ShareImage src={t('result')['share-image-url'].link} alt="" />
@@ -123,6 +128,7 @@ const Result = () => {
         </Icon>
         <Icon id="kakao_image" onClick={shareKakao}>
           <ShareImage src={t('result')['share-image-url'].kakao} alt="" />
+
         </Icon>
       </StyledDiv>
       <StyledDiv className="btn-wrap d-grid gap-2">

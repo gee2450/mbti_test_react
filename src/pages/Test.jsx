@@ -20,6 +20,7 @@ const Test = () => {
 
   // button click method
   const problemNum = t('test').data.length;
+
   const [progress, setProgress] = useState(1);
   const navigate = useNavigate();
 
