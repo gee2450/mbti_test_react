@@ -4,6 +4,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './lang/i18n.ts';
 
+document.body.style = 'background-color: #1e1e1e';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <App />
