@@ -11,14 +11,19 @@ const Upper = styled.div`
   margin-bottom: 20px;
 `;
 const Scroller = styled.div`
+  width: 375px;
   overflow: hidden;
+`;
+const ScrollerItems = styled.div`
   white-space: nowrap;
-  padding-left: 0;
-  overflow: true;
+  height: 450px;
+  ${({ test_cnt }) => {
+    return `width: ` + test_cnt * 375 + `px`;
+  }}
 `;
 const ScrollerItem = styled.div`
   width: 375px;
-  display: inline-block;
+  float: left;
 `;
 const ProblemWrap = styled.div`
   height: 63px;
@@ -146,51 +151,54 @@ const Test = () => {
       }
       </Upper>
 
-      <Scroller 
-        className='scroller'>
-      {
-        t('test')['data']
-        .map((data, idx) => {
-          return (
-            <ScrollerItem 
-                key={idx}
-                style={{"transform": 'translate(-' + (progress-1)*375 + 'px, 0px)', "transitionDuration": "750ms"}}>
-              <div>
-                <Bar src={t('test')['bar']} alt={t('test')['bar']}/>
-                <ProblemWrap>
-                <div style={{"width":"100%"}}>
-                {
-                  data["content"]
-                  .map((text, idx) => {
-                    return (<Problem key={idx} className='test-content text-center'>{text}</Problem>);
-                  })
-                }
+      <Scroller>
+        <ScrollerItems 
+          test_cnt={problemMaxNum}
+          >
+        {
+          t('test')['data']
+          .map((data, idx) => {
+            return (
+              <ScrollerItem 
+                  key={idx}
+                  style={{"width":"375px", "transform": 'translate(-' + (progress-1)*375 + 'px, 0px)', "transitionDuration": "750ms"}}>
+                <div>
+                  <Bar src={t('test')['bar']} alt={t('test')['bar']}/>
+                  <ProblemWrap>
+                  <div style={{"width":"100%"}}>
+                  {
+                    data["content"]
+                    .map((text, idx) => {
+                      return (<Problem key={idx} className='test-content text-center'>{text}</Problem>);
+                    })
+                  }
+                  </div>
+                  </ProblemWrap>
+                  <Bar src={t('test')['bar']} alt={t('test')['bar']}/>
                 </div>
-                </ProblemWrap>
-                <Bar src={t('test')['bar']} alt={t('test')['bar']}/>
-              </div>
-              <ButtonWrap>
-                <StyledButton className='test-btn-A' onClick={ () => {next(data["type"], data["A"])} }>
-                {
-                  data["text-A"]
-                  .map((text, idx) => {
-                    return (<ButtonText key={idx}>{text}</ButtonText>);
-                  })
-                }
-                </StyledButton>
-                <StyledButton className='test-btn-B' onClick={ () => {next(data["type"], data["B"])} }>
-                {
-                  data["text-B"]
-                  .map((text, idx) => {
-                    return (<ButtonText key={idx}>{text}</ButtonText>);
-                  })
-                }
-                </StyledButton>
-              </ButtonWrap>
-            </ScrollerItem>
-          );
-          })
-      }
+                <ButtonWrap>
+                  <StyledButton className='test-btn-A' onClick={ () => {next(data["type"], data["A"])} }>
+                  {
+                    data["text-A"]
+                    .map((text, idx) => {
+                      return (<ButtonText key={idx}>{text}</ButtonText>);
+                    })
+                  }
+                  </StyledButton>
+                  <StyledButton className='test-btn-B' onClick={ () => {next(data["type"], data["B"])} }>
+                  {
+                    data["text-B"]
+                    .map((text, idx) => {
+                      return (<ButtonText key={idx}>{text}</ButtonText>);
+                    })
+                  }
+                  </StyledButton>
+                </ButtonWrap>
+              </ScrollerItem>
+            );
+            })
+        }
+        </ScrollerItems>
       </Scroller>
     </StyledArticle>
   );
