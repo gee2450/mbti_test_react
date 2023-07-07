@@ -13,7 +13,7 @@ const StyledDiv = styled.div`
   margin-bottom: 8px;
   color: white;
 `;
-const Intro = styled.html`
+const Intro = styled.p`
   display: grid!important;
   padding-left: 65px;
   margin-bottom: -5px;
@@ -21,7 +21,7 @@ const Intro = styled.html`
   font-weight: bold;
   color: #6c757d;
 `;
-const Title = styled.html`
+const Title = styled.p`
   display: grid!important;
   padding-left: 65px;
   margin-bottom: -5px;
@@ -76,14 +76,14 @@ const Start = () => {
           {
             t('start')['intro']
             .map((content, idx) => {
-              return (<Intro>{content}</Intro>);
+              return (<Intro key={idx}>{content}</Intro>);
             })
           }
         </StyledDiv>
         {
           t('start')['title']
           .map((content, idx) => {
-            return (<Title>{content}</Title>);
+            return (<Title key={idx}>{content}</Title>);
           })
         }
         <ImageWrap>
