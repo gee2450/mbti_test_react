@@ -2,7 +2,15 @@
     "namespace": "test",
     "lng": "ko",
     "bar": "/images/common-img/orange-bar.svg",
-    "data": [
+    "progress-bars": 
+    {
+        "on-start": "/images/common-img/on-bar-s.svg",
+        "on-back": "/images/common-img/on-bar-s-back.svg",
+        "off-start": "/images/common-img/off-bar-s.svg",
+        "off-back": "/images/common-img/off-bar-s-back.svg"
+    },
+    "data": 
+    [
         {
             "content":
             [

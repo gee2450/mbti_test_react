@@ -1,36 +1,30 @@
-import { Button, ProgressBar } from 'react-bootstrap';
-import { React, useState } from 'react';
+import { Button } from 'react-bootstrap';
+import { React, useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import StyledArticle from '../component/Article';
 import styled from 'styled-components';
 import { useTranslation } from "react-i18next";
 
-const StyledDiv = styled.div`
-  display: block;
-  width: 288px;
+const Upper = styled.div`
   margin: 0 auto;
-  color: white;
+  display: inline-flex;
   margin-bottom: 20px;
+`;
+const Scroller = styled.div`
+  overflow: hidden;
+  white-space: nowrap;
+  padding-left: 0;
+  overflow: true;
+`;
+const ScrollerItem = styled.div`
+  width: 375px;
+  display: inline-block;
 `;
 const ProblemWrap = styled.div`
   height: 63px;
   margin: 0 auto;
   display: flex;
   align-items: center;
-`;
-const Problem = styled.p`
-  display: grid!important;
-  font-size: 14px;
-  font-weight: bold;
-  color : #f90;
-  margin-bottom: 0px;
-`;
-const ProblemButtonText = styled.p`
-  display: grid!important;
-  width: 100%;
-  white-space: normal;
-  font-size: 13px;
-  margin-bottom: 0px;
 `;
 const Bar = styled.img`
   width: 24px;
@@ -39,6 +33,13 @@ const Bar = styled.img`
   margin-top: 30px;
   margin-bottom: 30px;
 `
+const Problem = styled.p`
+  display: grid!important;
+  font-size: 14px;
+  font-weight: bold;
+  color : #f90;
+  margin-bottom: 0px;
+`;
 const ButtonWrap = styled.div`
   text-align: center;
   width: 288px;
@@ -64,17 +65,13 @@ const StyledButton = styled(Button)`
     color : #f90;
   }
 `;
-const StyledScroller = styled.div`
-  overflow: hidden;
-  white-space: nowrap;
-  padding-left: 0;
-  overflow: true;
+const ButtonText = styled.p`
+  display: grid!important;
+  width: 100%;
+  white-space: normal;
+  font-size: 13px;
+  margin-bottom: 0px;
 `;
-const StyledItem = styled.div`
-  width: 375px;
-  display: inline-block;
-`;
-
 
 
 const Test = () => {
@@ -88,14 +85,24 @@ const Test = () => {
       "SN": 0, 
       "TF": 0, 
       "JP": 0
-    }
+    }, 
+    images: []
   });
 
   // button click method
-  const problemNum = t('test').data.length;
+  const problemMaxNum = t('test')['data'].length;
 
   const [progress, setProgress] = useState(1);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    var arr = [];
+    arr.push(t('test')['progress-bars']["on-start"]);
+    for (var i=1; i<problemMaxNum; i++) {
+      arr.push(i % 2 == 1 ? t('test')['progress-bars']["off-back"] : t('test')['progress-bars']["off-start"]);
+    }
+    setData(prev => ({...prev, images: arr}));
+  }, []);
 
   function next(type, state) {
     // save answer score
@@ -104,7 +111,7 @@ const Test = () => {
     }
 
     // go to next problem or page
-    if (progress === problemNum)
+    if (progress === problemMaxNum)
     {
       var result = "";
       ["EI", "SN", "TF", "JP"].forEach((state) => {
@@ -116,44 +123,39 @@ const Test = () => {
       navigate(`/result?code=${parseInt(result, 2)}`);
     }
     else {
+      // change progress bar images
+      var _images = [...data.images];
+      _images[progress] =  data.images[progress].replace("off", "on");
+      setData(prev => ({...prev, images: _images}));
       setProgress(progress + 1);
     }
   }
 
-      // transition: { duration: 1 }
-
   return (
     <StyledArticle>
-      <StyledDiv style={{position: "relative"}}>
-        <ProgressBar variant="warning" now={100 / problemNum * progress}></ProgressBar>
-      </StyledDiv>
+      <Upper>
+      {
+        data.images
+        .map((bar_image, idx) => {
+          return(
+            <div key={idx}>
+              <img src={bar_image}/>
+            </div>
+          );
+        })
+      }
+      </Upper>
 
-      <div>
-        <div>
-          <img src='/images/common-img/off-bar-s.svg'/>
-        </div>
-        <div>
-          <img src='/images/common-img/off-bar-s-back.svg'/>
-        </div>
-        <div>
-          <img src='/images/common-img/on-bar-s.svg'/>
-        </div>
-        <div>
-          <img src='/images/common-img/on-bar-s-back.svg'/>
-        </div>
-      </div>
-      
-
-      <StyledScroller 
+      <Scroller 
         className='scroller'>
       {
-        t('test').data
+        t('test')['data']
         .map((data, idx) => {
           return (
-            <StyledItem 
+            <ScrollerItem 
                 key={idx}
-                style={{"transform": 'translate(-' + (progress-1)*375 + 'px, 0px)', "transition-duration": "500ms"}}>
-              <StyledDiv>
+                style={{"transform": 'translate(-' + (progress-1)*375 + 'px, 0px)', "transitionDuration": "750ms"}}>
+              <div>
                 <Bar src={t('test')['bar']} alt={t('test')['bar']}/>
                 <ProblemWrap>
                 <div style={{"width":"100%"}}>
@@ -166,13 +168,13 @@ const Test = () => {
                 </div>
                 </ProblemWrap>
                 <Bar src={t('test')['bar']} alt={t('test')['bar']}/>
-              </StyledDiv>
+              </div>
               <ButtonWrap>
                 <StyledButton className='test-btn-A' onClick={ () => {next(data["type"], data["A"])} }>
                 {
                   data["text-A"]
                   .map((text, idx) => {
-                    return (<ProblemButtonText key={idx}>{text}</ProblemButtonText>);
+                    return (<ButtonText key={idx}>{text}</ButtonText>);
                   })
                 }
                 </StyledButton>
@@ -180,16 +182,16 @@ const Test = () => {
                 {
                   data["text-B"]
                   .map((text, idx) => {
-                    return (<ProblemButtonText key={idx}>{text}</ProblemButtonText>);
+                    return (<ButtonText key={idx}>{text}</ButtonText>);
                   })
                 }
                 </StyledButton>
               </ButtonWrap>
-            </StyledItem>
+            </ScrollerItem>
           );
           })
       }
-      </StyledScroller>
+      </Scroller>
     </StyledArticle>
   );
 };
