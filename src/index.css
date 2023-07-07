@@ -14,7 +14,7 @@ code {
 
 #layout {
   display: flex;
-  max-width: 400px;
+  max-width: 375px;
   height: 600px;
   flex-direction: column;
   margin: 0 auto;
