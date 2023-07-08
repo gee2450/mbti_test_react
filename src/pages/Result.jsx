@@ -6,6 +6,17 @@ import styled from 'styled-components';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useTranslation } from "react-i18next";
 
+const Bars = styled.div`
+  ${({ bar_cnt = 2 }) => {
+    return `width: ` + bar_cnt * 12 + `px`;
+  }};
+  ${({ line_cnt = 1, weight = 1 }) => {
+    return `height: ` + line_cnt * weight * 24 + `px`;
+  }};
+  margin: 0 auto;
+  margin-top: 18px;
+  margin-bottom: 18px;
+`;
 const ResultImage = styled.img`
   width: 200px;
   height: 200px;
@@ -26,6 +37,35 @@ const Icon = styled.div`
   margin-bottom: 10px;
   display: inline;
 `
+const Text = styled.p`
+  display: grid!important;
+  color : #f90;
+  margin-bottom: 0px;
+  font-weight: 300;
+`;
+const StyledButton = styled(Button)`
+  background: rgb(0, 0, 0, 0);
+  width: 288px;
+  min-height: 70px;
+  margin: 0 auto;
+  border: 8px solid #f90;
+  border-radius: 0%;
+  color: #f90;
+  font-size: 15px;
+
+  &:hover{  
+    background-color : #f90;
+    border: 5px solid #f90;
+    color : black;
+  }
+`;
+const ButtonText = styled.p`
+  display: grid!important;
+  width: 100%;
+  white-space: normal;
+  font-size: 13px;
+  margin-bottom: 0px;
+`;
 
 const Result = () => {
   const { t } = useTranslation();
@@ -104,29 +144,78 @@ const Result = () => {
     }
   }, [])
 
+  const getBars = (image1, image2, repeat=6) => {
+    var arr = [];
+    for (let i = 0; i < repeat; i++) {
+      arr.push(
+        <div key={i} style={{"width": "fit-content", "height": "fit-content", "float": "left"}}>
+          <img src={image1} alt={image1}/>
+          <img src={image2} alt={image2}/>
+        </div>
+      );
+    }
+    return arr;
+  }
+
+  const brMaker = (texts, style) => {
+    var arr = [];
+    for (var i = 0; i < texts.length; i++) {
+      if (texts[i] === "") {
+        arr.push(<br key={i}/>)
+      }
+      else {
+        arr.push(<Text key={i} style={style}>{texts[i]}</Text>);
+      }
+    }
+    return arr;
+  }
+
   return (
     <StyledArticle>
-      <h1 style={{"color": "white"}}>{t('result').header}</h1>
+      <Bars bar_cnt={12}>
+        { getBars(t('images')["mini-bars"]["off-back"], t('images')["mini-bars"]["off-start"])}
+      </Bars>
+      <Text 
+        style={{"color": "#f90", "fontSize": "24px"}}>
+        {t('result').header}
+      </Text>
+      <Bars bar_cnt={12}>
+        { getBars(t('images')["mini-bars"]["on-start"], t('images')["mini-bars"]["on-back"])}
+      </Bars>
 
       <StyledDiv className="content">
         <ResultImage
-          src={t('result')['mbti-images'][mbti]} alt={t('result')['mbti-images'][mbti]}>
+          src={t('images')['mbti-images'][mbti]} alt={t('images')['mbti-images'][mbti]}>
         </ResultImage>
         {
           t('result')['result-data'][mbti]["sub-title"]
           .map((line, idx) => {
-            return (<h4 style={{"color": "white"}} key={idx}>{line}</h4>);
+            return (<Text key={idx} style={{"color": "white"}}>{line}</Text>);
           })
         }
-        <h2 style={{"color": "orange"}}>{t('result')['result-data'][mbti]["title"]}</h2>
-        <br/>
+        <Text 
+          style={{"color": "#f90", "fontWeight": "bold", "fontSize": "18px"}}>
+            {t('result')['result-data'][mbti]["title"]}
+        </Text>
+        
+        <Bars bar_cnt={12}>
+          { getBars(t('images')["mini-bars"]["on-back"], t('images')["mini-bars"]["on-start"])}
+        </Bars>
+
         {
-          t('result')['result-data'][mbti]["content"]
-          .map((line, idx) => {
-            return (<h6 style={{"color": "white"}} key={idx}>{line}</h6>);
-          })
+          brMaker(t('result')['result-data'][mbti]["content"], {"color": "#f90", "fontWeight": "500" , "fontSize": "13px"})
         }
       </StyledDiv>
+      
+      <Bars bar_cnt={2} line_cnt={3} weight={0.7} style={{"fontSize": "5px"}}>
+        { getBars(t('images')["mini-bars"]["on-start"], t('images')["mini-bars"]["on-back"], 1)}
+        { getBars(t('images')["mini-bars"]["on-start"], t('images')["mini-bars"]["on-back"], 1)}
+        { getBars(t('images')["mini-bars"]["on-start"], t('images')["mini-bars"]["on-back"], 1)}
+      </Bars>
+
+      <img src={t('images')["x-bars"]} alt={t('images')["x-bars"]}/>
+      
+      <img src={t('images')["x-bars"]} alt={t('images')["x-bars"]}/>
 
       <StyledDiv>
         <Icon onClick={shareUrl}>
@@ -143,10 +232,10 @@ const Result = () => {
 
         </Icon>
       </StyledDiv>
-      <StyledDiv className="btn-wrap d-grid gap-2">
-        <Button className='btn-test-result' variant="dark" size="lg" onClick={nextPage}>
+      <StyledDiv>
+        <StyledButton onClick={nextPage}>
           {t('result')["restart-button"]}
-        </Button>
+        </StyledButton>
       </StyledDiv>
     </StyledArticle>
   );

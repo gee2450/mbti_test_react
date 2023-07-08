@@ -87,7 +87,7 @@ const Start = () => {
           })
         }
         <ImageWrap>
-          <Image src={t('start')['image']} alt={t('start')['image']}/>
+          <Image src={t('images')['start-image']} alt={t('images')['start-image']}/>
         </ImageWrap>
       </StyledDiv>
       

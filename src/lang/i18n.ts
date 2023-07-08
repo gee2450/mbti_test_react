@@ -22,7 +22,14 @@ const mergeLocaleResource = () => {
     const targetRes: any = [...localeResource];
     targetRes.forEach((res: { namespace: string; lng: string }) => {
         const namespace = res.namespace;
-        resource[res.lng]['translations'][namespace] = res;
+        if (res.lng === 'common') {
+            for (var key in resource) {
+                resource[key]['translations'][namespace] = res;
+            }
+        }
+        else {
+            resource[res.lng]['translations'][namespace] = res;
+        }
     })
 };
 mergeLocaleResource();

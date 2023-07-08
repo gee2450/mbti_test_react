@@ -1,0 +1,39 @@
+{
+    "namespace": "images",
+    "lng": "common",
+    "start-image": "/images/common-img/img-mbti-all@2x.png",
+    "big-bar": "/images/common-img/orange-bar.svg",
+    "x-bars": "/images/common-img/orange-x-bar.svg",
+    "mini-bars": 
+    {
+        "on-start": "/images/common-img/on-bar-s.svg",
+        "on-back": "/images/common-img/on-bar-s-back.svg",
+        "off-start": "/images/common-img/off-bar-s.svg",
+        "off-back": "/images/common-img/off-bar-s-back.svg"
+    },
+    "share-image-url" : 
+    {
+        "link": "/images/common-img/icon-link.png",
+        "kakao": "/images/common-img/icon-kakao.png",
+        "twitter": "/images/common-img/icon-twitter.png",
+        "facebook": "/images/common-img/icon-facebook.png"
+    },
+    "mbti-images": {
+        "ISTJ": "/images/mbti_img/img_mbti01.png",
+        "ISFJ": "/images/mbti_img/img_mbti02.png",
+        "INFJ": "/images/mbti_img/img_mbti03.png",
+        "INTJ": "/images/mbti_img/img_mbti04.png",
+        "ISTP": "/images/mbti_img/img_mbti05.png",
+        "ISFP": "/images/mbti_img/img_mbti06.png",
+        "INFP": "/images/mbti_img/img_mbti07.png",
+        "INTP": "/images/mbti_img/img_mbti08.png",
+        "ESTP": "/images/mbti_img/img_mbti09.png",
+        "ESFP": "/images/mbti_img/img_mbti10.png",
+        "ENFP": "/images/mbti_img/img_mbti11.png",
+        "ENTP": "/images/mbti_img/img_mbti12.png",
+        "ESTJ": "/images/mbti_img/img_mbti13.png",
+        "ESFJ": "/images/mbti_img/img_mbti14.png",
+        "ENFJ": "/images/mbti_img/img_mbti15.png",
+        "ENTJ": "/images/mbti_img/img_mbti16.png"
+    }
+}

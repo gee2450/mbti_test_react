@@ -102,9 +102,9 @@ const Test = () => {
 
   useEffect(() => {
     var arr = [];
-    arr.push(t('test')['progress-bars']["on-start"]);
+    arr.push(t('images')['mini-bars']["on-start"]);
     for (var i=1; i<problemMaxNum; i++) {
-      arr.push(i % 2 == 1 ? t('test')['progress-bars']["off-back"] : t('test')['progress-bars']["off-start"]);
+      arr.push(i % 2 == 1 ? t('images')['mini-bars']["off-back"] : t('images')['mini-bars']["off-start"]);
     }
     setData(prev => ({...prev, images: arr}));
   }, []);
@@ -144,7 +144,7 @@ const Test = () => {
         .map((bar_image, idx) => {
           return(
             <div key={idx}>
-              <img src={bar_image}/>
+              <img src={bar_image} alt={bar_image}/>
             </div>
           );
         })
@@ -163,7 +163,7 @@ const Test = () => {
                   key={idx}
                   style={{"width":"375px", "transform": 'translate(-' + (progress-1)*375 + 'px, 0px)', "transitionDuration": "750ms"}}>
                 <div>
-                  <Bar src={t('test')['bar']} alt={t('test')['bar']}/>
+                  <Bar src={t('images')['big-bar']} alt={t('images')['big-bar']}/>
                   <ProblemWrap>
                   <div style={{"width":"100%"}}>
                   {
