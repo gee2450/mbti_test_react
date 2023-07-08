@@ -1,4 +1,4 @@
-import { React } from 'react';
+import { React, useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useNavigate, useLocation } from "react-router-dom";
 import StyledArticle from '../component/Article';
@@ -33,7 +33,8 @@ const Result = () => {
   // get test result code from url queary string
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const resultImg = parseInt(searchParams.get('code')) || 0; 
+  const code = parseInt(searchParams.get('code')) || 0; 
+  const [ mbti, setMbti ] = useState("ISFP");
   
   // restart button method
   const navigate = useNavigate();
@@ -70,7 +71,7 @@ const Result = () => {
         content: {
           title: t('result')['share-content'].kakao['send-text-title'], // 보여질 제목
           description: t('result')['share-content'].kakao['send-text-description'], // 보여질 설명
-          imageUrl: t('result')['result-data'][resultImg * 1]['src'], // 콘텐츠 URL
+          imageUrl: t('result')['result-data'][code * 1]['src'], // 콘텐츠 URL
 
           link: {
             mobileWebUrl: sendUrl,
@@ -94,25 +95,39 @@ const Result = () => {
     alert(t('result')['share-content'].link['send-text'])  // 알림창
     return sendUrl;
   }
+  
+  useEffect(() => {
+    for (var key in t('result')['result-data']) {
+      if (t('result')['result-data'][key].code == code) {
+        setMbti(key);
+      }
+    }
+  }, [])
 
   return (
     <StyledArticle>
-      <h1>{t('result').header}</h1>
-      {
-        t('result')['result-data']
-        .filter((_, idx) => idx === resultImg)
-        .map((content, idx) => {
-          return (
-            <StyledDiv className="content" key={idx}>
-              <ResultImage
-                src={content["src"]} alt={content["src"]}>
-              </ResultImage>
-              <h2>{content["title"]}</h2>
-              <h3>{content["content"]}</h3>
-            </StyledDiv>
-          );
-        })
-      }
+      <h1 style={{"color": "white"}}>{t('result').header}</h1>
+
+      <StyledDiv className="content">
+        <ResultImage
+          src={t('result')['mbti-images'][mbti]} alt={t('result')['mbti-images'][mbti]}>
+        </ResultImage>
+        {
+          t('result')['result-data'][mbti]["sub-title"]
+          .map((line, idx) => {
+            return (<h4 style={{"color": "white"}} key={idx}>{line}</h4>);
+          })
+        }
+        <h2 style={{"color": "orange"}}>{t('result')['result-data'][mbti]["title"]}</h2>
+        <br/>
+        {
+          t('result')['result-data'][mbti]["content"]
+          .map((line, idx) => {
+            return (<h6 style={{"color": "white"}} key={idx}>{line}</h6>);
+          })
+        }
+      </StyledDiv>
+
       <StyledDiv>
         <Icon onClick={shareUrl}>
           <ShareImage src={t('result')['share-image-url'].link} alt="" />
