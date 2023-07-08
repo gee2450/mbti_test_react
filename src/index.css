@@ -14,10 +14,22 @@ code {
 
 #layout {
   display: flex;
-  max-width: 400px;
-  height: 600px;
+  max-width: 375px;
   flex-direction: column;
   margin: 0 auto;
-  padding-top: 20px;
-  background-color: rgb(203, 203, 255);
+  padding: 60px 0;
+  background-color: #1e1e1e;
+}
+
+.gray-font {
+  color: #6c757d;
+}
+.white-font {
+  color: white;
+}
+.orange-font {
+  color: #f90;
+}
+.font-bold {
+  font-weight: bold;
 }

@@ -1,7 +1,17 @@
 {
     "namespace": "start",
     "lng": "en",
-    "title": "Title",
-    "intro": "Intro",
-    "btn-test-start": "Start !!!"
+    "title": 
+    [
+        "Am I",
+        "the type",
+        "to make plans?"
+    ],
+    "intro": 
+    [
+        "Real new life", 
+        "this year!"
+    ],
+    "image": "/images/img-mbti-all@2x.png",
+    "btn-test-start": "Get to know Serengeti animals"
 }
