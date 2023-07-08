@@ -57,7 +57,7 @@ const StyledButton = styled(Button)`
 
   &:hover{  
     background-color : #f90;
-    border: 5px solid #f90;
+    border: 8px solid #f90;
     color : black;
   }
 `;

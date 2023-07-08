@@ -32,14 +32,21 @@ const ShareImage = styled.img`
 `
 const StyledDiv = styled.div`
   margin-bottom: 10px;
+  overflow: auto;
+  display: inline-block;
+  align-text: center;
 `
 const Icon = styled.div`
   margin-bottom: 10px;
-  display: inline;
+  display: block;
+  float: left;
+  height: 80px;
+  margin: 0 auto;
+
 `
 const Text = styled.p`
-  display: grid!important;
-  color : #f90;
+  display: block;
+  color : white;
   margin-bottom: 0px;
   font-weight: 300;
 `;
@@ -55,7 +62,7 @@ const StyledButton = styled(Button)`
 
   &:hover{  
     background-color : #f90;
-    border: 5px solid #f90;
+    border: 8px solid #f90;
     color : black;
   }
 `;
@@ -157,28 +164,14 @@ const Result = () => {
     return arr;
   }
 
-  const brMaker = (texts, style) => {
-    var arr = [];
-    for (var i = 0; i < texts.length; i++) {
-      if (texts[i] === "") {
-        arr.push(<br key={i}/>)
-      }
-      else {
-        arr.push(<Text key={i} style={style}>{texts[i]}</Text>);
-      }
-    }
-    return arr;
-  }
-
   return (
     <StyledArticle>
       <Bars bar_cnt={12}>
         { getBars(t('images')["mini-bars"]["off-back"], t('images')["mini-bars"]["off-start"])}
       </Bars>
       <Text 
-        style={{"color": "#f90", "fontSize": "24px"}}>
-        {t('result').header}
-      </Text>
+        style={{"color": "#f90", "fontSize": "24px"}} 
+        dangerouslySetInnerHTML={{__html: t('result').header}}/>
       <Bars bar_cnt={12}>
         { getBars(t('images')["mini-bars"]["on-start"], t('images')["mini-bars"]["on-back"])}
       </Bars>
@@ -187,23 +180,21 @@ const Result = () => {
         <ResultImage
           src={t('images')['mbti-images'][mbti]} alt={t('images')['mbti-images'][mbti]}>
         </ResultImage>
-        {
-          t('result')['result-data'][mbti]["sub-title"]
-          .map((line, idx) => {
-            return (<Text key={idx} style={{"color": "white"}}>{line}</Text>);
-          })
-        }
         <Text 
-          style={{"color": "#f90", "fontWeight": "bold", "fontSize": "18px"}}>
-            {t('result')['result-data'][mbti]["title"]}
-        </Text>
+          style={{"color": "white", "fontSize": "18px"}}
+          dangerouslySetInnerHTML={{__html: t('result')['result-data'][mbti]["title"]}}/>
         
         <Bars bar_cnt={12}>
           { getBars(t('images')["mini-bars"]["on-back"], t('images')["mini-bars"]["on-start"])}
         </Bars>
 
         {
-          brMaker(t('result')['result-data'][mbti]["content"], {"color": "#f90", "fontWeight": "500" , "fontSize": "13px"})
+          t('result')['result-data'][mbti]["content"]
+          .map((content, idx)=> {
+            return (<Text key={idx} 
+                  style={{"color": "#f90", "fontWeight": "500" , "fontSize": "13px"}} 
+                  dangerouslySetInnerHTML={{__html: content}}/>);
+          })
         }
       </StyledDiv>
       
@@ -214,28 +205,59 @@ const Result = () => {
       </Bars>
 
       <img src={t('images')["x-bars"]} alt={t('images')["x-bars"]}/>
-      
+      <ResultImage style={{"width": "30px", "height": "30px"}} src={t('images')["tree"]} alt={t('images')["tree"]}/>
+      <Text dangerouslySetInnerHTML={{__html: t('result')['friend-text']}}/>
+      {
+        [ [t('result')['result-data'][mbti]['friend1'], t('images')["like"]], 
+          [t('result')['result-data'][mbti]['friend2'], t('images')["dislike"]]]
+        .map((friend_feature, idx) => {
+          const [friend, feature_img] = friend_feature;
+          console.log(friend, feature_img, idx);
+          return (
+            <div style={{"width": "50%", "float": "left"}}>
+              <img src={feature_img} alt={feature_img}/>
+              <ResultImage
+                style={{"width": "150px", "height": "150px"}}
+                src={t('images')['mbti-images'][friend]} alt={t('images')['mbti-images'][friend]}>
+              </ResultImage>
+              <Text 
+                style={{"color": "white", "fontSize": "16px"}}
+                dangerouslySetInnerHTML={{__html: t('result')['result-data'][friend]["title"]}}/>
+            </div>
+          );
+        })
+      }
       <img src={t('images')["x-bars"]} alt={t('images')["x-bars"]}/>
 
+      <Text 
+        style={{"color": "white", "fontSize": "23px"}}
+        dangerouslySetInnerHTML={{__html: t('result')['share-text']["title"]}}/>
+      <Text 
+        style={{"color": "white", "fontSize": "16px"}}
+        dangerouslySetInnerHTML={{__html: t('result')['share-text']["content"]}}/>
+
       <StyledDiv>
-        <Icon onClick={shareUrl}>
+        <Icon style={{"width": "fit-content"}} onClick={shareUrl}>
           <ShareImage src={t('result')['share-image-url'].link} alt="" />
+          <p style={{"width": "fit-content", "color": "white", "fontSize": "12px", "margin": "0 auto"}}>URL 복사</p>
         </Icon>
         <Icon onClick={shareFacebook}>
           <ShareImage src={t('result')['share-image-url'].facebook} alt="" />
+          <p style={{"width": "fit-content", "color": "white", "fontSize": "12px", "margin": "0 auto"}}>페이스북</p>
         </Icon>
         <Icon onClick={shareTwitter}>
           <ShareImage src={t('result')['share-image-url'].twitter} alt="" />
+          <p style={{"width": "fit-content", "color": "white", "fontSize": "12px", "margin": "0 auto"}}>트위터</p>
         </Icon>
         <Icon id="kakao_image" onClick={shareKakao}>
           <ShareImage src={t('result')['share-image-url'].kakao} alt="" />
-
+          <p style={{"width": "fit-content", "color": "white", "fontSize": "12px", "margin": "0 auto"}}>카카오톡</p>
         </Icon>
       </StyledDiv>
       <StyledDiv>
-        <StyledButton onClick={nextPage}>
-          {t('result')["restart-button"]}
-        </StyledButton>
+        <StyledButton 
+          onClick={nextPage}
+          dangerouslySetInnerHTML={{__html: t('result')["restart-button"]}}/>
       </StyledDiv>
     </StyledArticle>
   );

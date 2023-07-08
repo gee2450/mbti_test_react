@@ -4,6 +4,9 @@
     "start-image": "/images/common-img/img-mbti-all@2x.png",
     "big-bar": "/images/common-img/orange-bar.svg",
     "x-bars": "/images/common-img/orange-x-bar.svg",
+    "tree": "/images/common-img/tree-emoji@2x.png",
+    "like": "/images/common-img/like-emoji@2x.png",
+    "dislike": "/images/common-img/dislike-emoji@2x.png",
     "mini-bars": 
     {
         "on-start": "/images/common-img/on-bar-s.svg",

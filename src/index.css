@@ -21,3 +21,13 @@ code {
   padding-top: 60px;
   background-color: #1e1e1e;
 }
+
+.font-white-point {
+  color: white;
+}
+.font-color-point {
+  color: #f90;
+}
+.font-bold {
+  font-weight: bold;
+}
