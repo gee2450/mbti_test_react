@@ -1,40 +1,31 @@
 import { React, useEffect, useState } from 'react';
-import { Button } from 'react-bootstrap';
 import { useNavigate, useLocation } from "react-router-dom";
 import StyledArticle from '../component/Article';
 import styled from 'styled-components';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useTranslation } from "react-i18next";
+import HoverButton from '../component/Button';
 
+//#region styled-components
 const Bars = styled.div`
   ${({ bar_cnt = 2 }) => {
     return `width: ` + bar_cnt * 12 + `px`;
   }};
   ${({ line_cnt = 1, weight = 1 }) => {
-    return `height: ` + line_cnt * weight * 24 + `px`;
+    return `height: ` + line_cnt * weight * 12 + `px`;
   }};
   margin: 0 auto;
-  margin-top: 18px;
-  margin-bottom: 18px;
 `;
 const ResultImage = styled.img`
   width: 200px;
   height: 200px;
   margin: 0 auto;
   margin-bottom: 10px;
-  display: block;
-  border-radius: 70%;
 `
 const ShareImage = styled.img`
   width: 40px;
   height: 40px;
   margin: 10px;
-`
-const StyledDiv = styled.div`
-  margin-bottom: 10px;
-  overflow: auto;
-  display: inline-block;
-  align-text: center;
 `
 const Icon = styled.div`
   margin-bottom: 10px;
@@ -42,37 +33,16 @@ const Icon = styled.div`
   float: left;
   height: 80px;
   margin: 0 auto;
-
 `
 const Text = styled.p`
   display: block;
-  color : white;
   margin-bottom: 0px;
-  font-weight: 300;
+  line-height: 1.17;
+  ${({ font_size }) => {
+    return `font-size: ${font_size}px`;
+  }};
 `;
-const StyledButton = styled(Button)`
-  background: rgb(0, 0, 0, 0);
-  width: 288px;
-  min-height: 70px;
-  margin: 0 auto;
-  border: 8px solid #f90;
-  border-radius: 0%;
-  color: #f90;
-  font-size: 15px;
-
-  &:hover{  
-    background-color : #f90;
-    border: 8px solid #f90;
-    color : black;
-  }
-`;
-const ButtonText = styled.p`
-  display: grid!important;
-  width: 100%;
-  white-space: normal;
-  font-size: 13px;
-  margin-bottom: 0px;
-`;
+//#endregion
 
 const Result = () => {
   const { t } = useTranslation();
@@ -166,99 +136,116 @@ const Result = () => {
 
   return (
     <StyledArticle>
-      <Bars bar_cnt={12}>
-        { getBars(t('images')["mini-bars"]["off-back"], t('images')["mini-bars"]["off-start"])}
-      </Bars>
-      <Text 
-        style={{"color": "#f90", "fontSize": "24px"}} 
-        dangerouslySetInnerHTML={{__html: t('result').header}}/>
-      <Bars bar_cnt={12}>
-        { getBars(t('images')["mini-bars"]["on-start"], t('images')["mini-bars"]["on-back"])}
-      </Bars>
-
-      <StyledDiv className="content">
-        <ResultImage
-          src={t('images')['mbti-images'][mbti]} alt={t('images')['mbti-images'][mbti]}>
-        </ResultImage>
+      <div className="header">
+        <Bars bar_cnt={12}>
+          {getBars(t('images')["mini-bars"]["off-back"], t('images')["mini-bars"]["off-start"])}
+        </Bars>
         <Text 
-          style={{"color": "white", "fontSize": "18px"}}
-          dangerouslySetInnerHTML={{__html: t('result')['result-data'][mbti]["title"]}}/>
-        
+          font_size={24} className="orange-font" style={{"margin": "20px 0"}}
+          dangerouslySetInnerHTML={{__html: t('result').header}}/>
+        <Bars bar_cnt={12}>
+          { getBars(t('images')["mini-bars"]["on-start"], t('images')["mini-bars"]["on-back"])}
+        </Bars>
+      </div>
+
+      <div className="content">
+        <div style={{"margin": "30px 0"}}>
+          <ResultImage
+            src={t('images')['mbti-images'][mbti]} alt={t('images')['mbti-images'][mbti]}>
+          </ResultImage>
+          <Text 
+            font_size={18}
+            dangerouslySetInnerHTML={{__html: t('result')['result-data'][mbti]["title"]}}/>
+        </div>
         <Bars bar_cnt={12}>
           { getBars(t('images')["mini-bars"]["on-back"], t('images')["mini-bars"]["on-start"])}
         </Bars>
-
-        {
+        <div style={{"margin-top": "36px"}}>{
           t('result')['result-data'][mbti]["content"]
           .map((content, idx)=> {
             return (<Text key={idx} 
                   style={{"color": "#f90", "fontWeight": "500" , "fontSize": "13px"}} 
                   dangerouslySetInnerHTML={{__html: content}}/>);
           })
-        }
-      </StyledDiv>
-      
-      <Bars bar_cnt={2} line_cnt={3} weight={0.7} style={{"fontSize": "5px"}}>
-        { getBars(t('images')["mini-bars"]["on-start"], t('images')["mini-bars"]["on-back"], 1)}
-        { getBars(t('images')["mini-bars"]["on-start"], t('images')["mini-bars"]["on-back"], 1)}
-        { getBars(t('images')["mini-bars"]["on-start"], t('images')["mini-bars"]["on-back"], 1)}
-      </Bars>
+        }</div>
+        <Bars 
+          bar_cnt={2} line_cnt={3} weight={1.25} 
+          style={{"fontSize": "5px", "margin": "36px auto"}}>
+          { getBars(t('images')["mini-bars"]["on-start"], t('images')["mini-bars"]["on-back"], 1)}
+          { getBars(t('images')["mini-bars"]["on-start"], t('images')["mini-bars"]["on-back"], 1)}
+          { getBars(t('images')["mini-bars"]["on-start"], t('images')["mini-bars"]["on-back"], 1)}
+        </Bars>
+      </div>
+
+      <img className="line" src={t('images')["x-bars"]} alt={t('images')["x-bars"]}/>
+
+      <div style={{"overflow": "auto", "margin-top":"24px", "margin-bottom": "44px"}}>
+        <div>
+          <ResultImage style={{"width": "30px", "height": "30px", "margin": "0"}} src={t('images')["tree"]} alt={t('images')["tree"]}/>
+        </div>
+        <Text 
+          font_size={24} style={{"margin":"24px auto"}}
+          dangerouslySetInnerHTML={{__html: t('result')['friend-text']}}/>
+        <div style={{"overflow": "auto", "width": "80%", "margin": "0 auto"}}>{
+          [ [t('result')['result-data'][mbti]['friend1'], t('images')["like"], t('result')['like-text'], "left"], 
+            [t('result')['result-data'][mbti]['friend2'], t('images')["dislike"], t('result')['dislike-text'], "right"]]
+          .map((friend_feature, idx) => {
+            const [friend, feature_img, feature_text, floatD] = friend_feature;
+            return (
+              <div key={idx} style={{"width": "45%", "float": floatD}}>
+                <img style={{"width": "30px", "height": "30px", "margin": "10px 0"}} src={feature_img} alt={feature_img}/>
+                <Text 
+                  font_size={13} 
+                  dangerouslySetInnerHTML={{__html: feature_text}}/>
+                <ResultImage
+                  style={{"width": "110px", "height": "110px"}}
+                  src={t('images')['mbti-images'][friend]} alt={t('images')['mbti-images'][friend]}>
+                </ResultImage>
+                <Text 
+                  font_size={13}
+                  dangerouslySetInnerHTML={{__html: t('result')['result-data'][friend]["title"]}}/>
+              </div>
+            );
+          })
+        }</div>
+      </div>
 
       <img src={t('images')["x-bars"]} alt={t('images')["x-bars"]}/>
-      <ResultImage style={{"width": "30px", "height": "30px"}} src={t('images')["tree"]} alt={t('images')["tree"]}/>
-      <Text dangerouslySetInnerHTML={{__html: t('result')['friend-text']}}/>
-      {
-        [ [t('result')['result-data'][mbti]['friend1'], t('images')["like"]], 
-          [t('result')['result-data'][mbti]['friend2'], t('images')["dislike"]]]
-        .map((friend_feature, idx) => {
-          const [friend, feature_img] = friend_feature;
-          console.log(friend, feature_img, idx);
-          return (
-            <div style={{"width": "50%", "float": "left"}}>
-              <img src={feature_img} alt={feature_img}/>
-              <ResultImage
-                style={{"width": "150px", "height": "150px"}}
-                src={t('images')['mbti-images'][friend]} alt={t('images')['mbti-images'][friend]}>
-              </ResultImage>
-              <Text 
-                style={{"color": "white", "fontSize": "16px"}}
-                dangerouslySetInnerHTML={{__html: t('result')['result-data'][friend]["title"]}}/>
-            </div>
-          );
-        })
-      }
-      <img src={t('images')["x-bars"]} alt={t('images')["x-bars"]}/>
 
-      <Text 
-        style={{"color": "white", "fontSize": "23px"}}
-        dangerouslySetInnerHTML={{__html: t('result')['share-text']["title"]}}/>
-      <Text 
-        style={{"color": "white", "fontSize": "16px"}}
-        dangerouslySetInnerHTML={{__html: t('result')['share-text']["content"]}}/>
+      <div style={{"overflow": "auto", "margin":"24px auto"}}>
+        <div></div>
+        <Text font_size={23}
+          style={{"color": "white"}}
+          dangerouslySetInnerHTML={{__html: t('result')['share-text']["title"]}}/>
+        <Text font_size={16}
+          style={{"margin": "24px 0 30px"}}
+          dangerouslySetInnerHTML={{__html: t('result')['share-text']["content"]}}/>
 
-      <StyledDiv>
-        <Icon style={{"width": "fit-content"}} onClick={shareUrl}>
-          <ShareImage src={t('result')['share-image-url'].link} alt="" />
-          <p style={{"width": "fit-content", "color": "white", "fontSize": "12px", "margin": "0 auto"}}>URL 복사</p>
-        </Icon>
-        <Icon onClick={shareFacebook}>
-          <ShareImage src={t('result')['share-image-url'].facebook} alt="" />
-          <p style={{"width": "fit-content", "color": "white", "fontSize": "12px", "margin": "0 auto"}}>페이스북</p>
-        </Icon>
-        <Icon onClick={shareTwitter}>
-          <ShareImage src={t('result')['share-image-url'].twitter} alt="" />
-          <p style={{"width": "fit-content", "color": "white", "fontSize": "12px", "margin": "0 auto"}}>트위터</p>
-        </Icon>
-        <Icon id="kakao_image" onClick={shareKakao}>
-          <ShareImage src={t('result')['share-image-url'].kakao} alt="" />
-          <p style={{"width": "fit-content", "color": "white", "fontSize": "12px", "margin": "0 auto"}}>카카오톡</p>
-        </Icon>
-      </StyledDiv>
-      <StyledDiv>
-        <StyledButton 
+        <div style={{"overflow": "auto", "width": "288px", "margin": "0 auto 20px"}}>
+          <Icon style={{"width": "25%"}} onClick={shareUrl}>
+            <ShareImage src={t('images')['share-image-url'].link} alt="" />
+            <p style={{"width": "fit-content", "color": "white", "fontSize": "12px", "margin": "0 auto"}}>URL 복사</p>
+          </Icon>
+          <Icon style={{"width": "25%"}} onClick={shareFacebook}>
+            <ShareImage src={t('images')['share-image-url'].facebook} alt="" />
+            <p style={{"width": "fit-content", "color": "white", "fontSize": "12px", "margin": "0 auto"}}>페이스북</p>
+          </Icon>
+          <Icon style={{"width": "25%"}} onClick={shareTwitter}>
+            <ShareImage src={t('images')['share-image-url'].twitter} alt="" />
+            <p style={{"width": "fit-content", "color": "white", "fontSize": "12px", "margin": "0 auto"}}>트위터</p>
+          </Icon>
+          <Icon id="kakao_image" style={{"width": "25%"}} onClick={shareKakao}>
+            <ShareImage src={t('images')['share-image-url'].kakao} alt="" />
+            <p style={{"width": "fit-content", "color": "white", "fontSize": "12px", "margin": "0 auto"}}>카카오톡</p>
+          </Icon>
+        </div>
+      </div>
+      <div>
+        <HoverButton
           onClick={nextPage}
+          text_line={2}
           dangerouslySetInnerHTML={{__html: t('result')["restart-button"]}}/>
-      </StyledDiv>
+      </div>
     </StyledArticle>
   );
 };

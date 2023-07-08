@@ -1,17 +1,8 @@
 {
     "namespace": "start",
     "lng": "ko",
-    "title": 
-    [
-        "나는 어떻게",
-        "계획을 세우는",
-        "타입일까?"
-    ],
-    "intro": 
-    [
-        "올해", 
-        "진짜 새 삶 산다!"
-    ],
+    "title": "나는 어떻게<br/>계획을 세우는<br/>타입일까?",
+    "intro": "올해<br/>진짜 새 삶 산다!",
     "image": "/images/common-img/img-mbti-all@2x.png",
     "btn-test-start": "세렝게티 동물로 알아보기"
 }

@@ -1,11 +1,12 @@
 import { React } from 'react';
 import { useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button } from 'react-bootstrap';
 import StyledArticle from '../component/Article';
 import styled from 'styled-components';
 import { useTranslation } from "react-i18next";
+import HoverButton from '../component/Button';
 
+//#region styled-components
 const StyledDiv = styled.div`
   text-align: left;
   display: block;
@@ -13,23 +14,20 @@ const StyledDiv = styled.div`
   margin-bottom: 8px;
   color: white;
 `;
-const Intro = styled.p`
+const Text = styled.p`
   display: grid!important;
-  padding-left: 65px;
+  padding-left: 50px;
   margin-bottom: -5px;
-  font-size: 15px;
-  font-weight: bold;
-  color: #6c757d;
-`;
-const Title = styled.p`
-  display: grid!important;
-  padding-left: 65px;
-  margin-bottom: -5px;
-  font-size: 25px;
-  font-weight: bold;
+  line-height: 1.17;
 
-  position: relative;
-  z-index: 1;
+  ${({ font_size }) => {
+    return `font-size: ${font_size}px;`;
+  }};
+  ${({ bench_mark = "false" }) => {
+    if (bench_mark === "true") {
+      return `position: relative; z-index: 1;`;
+    }
+  }};
 `;
 const ImageWrap = styled.div`
   position: relative;
@@ -44,23 +42,8 @@ const Image = styled.img`
   width: 375px;
   height: 375px;
   margin: 0 auto;
-`
-const StyledButton = styled(Button)`
-  background: rgb(0, 0, 0, 0);
-  width: 288px;
-  min-height: 70px;
-  margin: 0 auto;
-  border: 8px solid #f90;
-  border-radius: 0%;
-  color: #f90;
-  font-size: 15px;
-
-  &:hover{  
-    background-color : #f90;
-    border: 8px solid #f90;
-    color : black;
-  }
 `;
+//#endregion
 
 const Start = () => {
   const { t } = useTranslation('translations');
@@ -73,27 +56,22 @@ const Start = () => {
     <StyledArticle>
       <StyledDiv>
         <StyledDiv>
-          {
-            t('start')['intro']
-            .map((content, idx) => {
-              return (<Intro key={idx}>{content}</Intro>);
-            })
-          }
+          <Text
+            className="gray-font font-bold" font_size={15}
+            dangerouslySetInnerHTML={{__html: t('start')['intro']}}/>
         </StyledDiv>
-        {
-          t('start')['title']
-          .map((content, idx) => {
-            return (<Title key={idx}>{content}</Title>);
-          })
-        }
+        <Text 
+          className="font-bold" font_size={25}
+          bench_mark={true.toString()}
+          dangerouslySetInnerHTML={{__html: t('start')['title']}}/>
         <ImageWrap>
           <Image src={t('images')['start-image']} alt={t('images')['start-image']}/>
         </ImageWrap>
       </StyledDiv>
       
-      <div className="btn-wrap d-grid gap-2">
-        <StyledButton className='btn-test-start' variant="dark" size="lg" onClick={nextPage}>{t('start')['btn-test-start']}</StyledButton>
-      </div>
+      <HoverButton
+        className="font-bold" text_line={1} onClick={nextPage} 
+        dangerouslySetInnerHTML={{__html: t('start')['btn-test-start']}}/>
     </StyledArticle>
   );
 };

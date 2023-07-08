@@ -16,7 +16,7 @@
     },
     "share-image-url" : 
     {
-        "link": "/images/common-img/icon-link.png",
+        "link": "/images/common-img/icon-link.svg",
         "kakao": "/images/common-img/icon-kakao.png",
         "twitter": "/images/common-img/icon-twitter.png",
         "facebook": "/images/common-img/icon-facebook.png"

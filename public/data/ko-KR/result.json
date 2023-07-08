@@ -2,15 +2,10 @@
     "namespace": "result",
     "lng": "ko",
     "header": "나와 비슷한 세렝게티 동물은?",
-    "restart-button": "<span class='font-white-point'>나랑 좀 다른 것 같은데… 하신다면?</span><br/>다시 알아보기", 
-    "share-image-url" : 
-    {
-        "link": "/images/common-img/icon-link.png",
-        "kakao": "/images/common-img/icon-kakao.png",
-        "twitter": "/images/common-img/icon-twitter.png",
-        "facebook": "/images/common-img/icon-facebook.png"
-    },
-    "friend-text": "나랑 어울리는<br/><span class='font-bold font-color-point'>세렝게티 동물</span>은 누구?",
+    "restart-button": "<span class='white-font'>나랑 좀 다른 것 같은데… 하신다면?</span><br/>다시 알아보기", 
+    "friend-text": "나랑 어울리는<br/><span class='font-bold orange-font'>세렝게티 동물</span>은 누구?",
+    "like-text": "어울리는 동물",
+    "dislike-text": "피해야하는 동물",
     "share-text": 
     {
         "title": "세렝게티 동물<br/><span class='font-bold'>공유하기</span>",
@@ -79,7 +74,7 @@
         },
         "ESTP": {
             "code": 1,
-            "title": "백문이불여일견, <br/>계획은 세우되 행동이 우선!<span class='font-bold'>행동파 악어</span>",
+            "title": "백문이불여일견, <br/>계획은 세우되 행동이 우선!<br/><span class='font-bold'>행동파 악어</span>",
             "content": 
             [
                 "월급 3일 전, 계좌 잔고 520원. ",

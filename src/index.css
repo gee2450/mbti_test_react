@@ -15,17 +15,19 @@ code {
 #layout {
   display: flex;
   max-width: 375px;
-  height: 600px;
   flex-direction: column;
   margin: 0 auto;
-  padding-top: 60px;
+  padding: 60px 0;
   background-color: #1e1e1e;
 }
 
-.font-white-point {
+.gray-font {
+  color: #6c757d;
+}
+.white-font {
   color: white;
 }
-.font-color-point {
+.orange-font {
   color: #f90;
 }
 .font-bold {

@@ -5,63 +5,59 @@ import StyledArticle from '../component/Article';
 import styled from 'styled-components';
 import { useTranslation } from "react-i18next";
 
-const Upper = styled.div`
+//#region styled-components
+const Bars = styled.div`
   margin: 0 auto;
   display: inline-flex;
   margin-bottom: 20px;
 `;
-const Scroller = styled.div`
-  width: 375px;
-  overflow: hidden;
-`;
-const ScrollerItems = styled.div`
-  white-space: nowrap;
-  height: 450px;
-  ${({ test_cnt }) => {
-    return `width: ` + test_cnt * 375 + `px`;
+const Text = styled.p`
+  display: grid!important;
+  margin-bottom: 0px;
+  line-height: 1.17;
+  ${({ font_size = 13 }) => {
+    return `font-size: ${font_size}px`;
   }}
 `;
-const ScrollerItem = styled.div`
-  width: 375px;
-  float: left;
-`;
-const ProblemWrap = styled.div`
-  height: 63px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-`;
-const Bar = styled.img`
+const BigBar = styled.img`
   width: 24px;
   height: 24px;
   margin: 0 auto;
   margin-top: 30px;
   margin-bottom: 30px;
 `
-const Problem = styled.p`
-  display: grid!important;
-  font-size: 14px;
-  font-weight: bold;
-  color : #f90;
-  margin-bottom: 0px;
+const Viewer = styled.div`
+  width: 375px;
+  overflow: hidden;
+`;
+const Items = styled.div`
+  white-space: nowrap;
+  height: 450px;
+  ${({ test_cnt }) => {
+    return `width: ` + test_cnt * 375 + `px`;
+  }}
+`;
+const Item = styled.div`
+  width: 375px;
+  float: left;
+`;
+const ProblemWrap = styled.div`
+  height: 63px;
+  display: flex;
+  align-items: center;
 `;
 const ButtonWrap = styled.div`
-  text-align: center;
   width: 288px;
   border: 8px solid #343a40;
   margin: 0 auto;
 `;
 const StyledButton = styled(Button)`
-  background: #1e1e1e;
+  background: rgb(0,0,0,0);
   width: 100%;
   min-height: 100px;
-  margin: 0 auto;
   border: 0.5px solid #343a40;
   border-radius: 0%;
-  color: white;
   font-size: 13px;
-  padding-left: 24px;
-  padding-right: 24px;
   display: block;
 
   &:hover{  
@@ -70,14 +66,7 @@ const StyledButton = styled(Button)`
     color : #f90;
   }
 `;
-const ButtonText = styled.p`
-  display: grid!important;
-  width: 100%;
-  white-space: normal;
-  font-size: 13px;
-  margin-bottom: 0px;
-`;
-
+//#endregion
 
 const Test = () => {
   const { t } = useTranslation();
@@ -138,68 +127,45 @@ const Test = () => {
 
   return (
     <StyledArticle>
-      <Upper>
-      {
+      <Bars>{
         data.images
         .map((bar_image, idx) => {
-          return(
-            <div key={idx}>
-              <img src={bar_image} alt={bar_image}/>
-            </div>
-          );
+          return(<img key={idx} src={bar_image} alt={bar_image}/>);
         })
-      }
-      </Upper>
+      }</Bars>
 
-      <Scroller>
-        <ScrollerItems 
-          test_cnt={problemMaxNum}
-          >
+      <Viewer>
+        <Items test_cnt={problemMaxNum}>
         {
           t('test')['data']
           .map((data, idx) => {
             return (
-              <ScrollerItem 
+              <Item 
                   key={idx}
                   style={{"width":"375px", "transform": 'translate(-' + (progress-1)*375 + 'px, 0px)', "transitionDuration": "750ms"}}>
                 <div>
-                  <Bar src={t('images')['big-bar']} alt={t('images')['big-bar']}/>
+                  <BigBar src={t('images')['big-bar']} alt={t('images')['big-bar']}/>
                   <ProblemWrap>
-                  <div style={{"width":"100%"}}>
-                  {
-                    data["content"]
-                    .map((text, idx) => {
-                      return (<Problem key={idx} className='test-content text-center'>{text}</Problem>);
-                    })
-                  }
-                  </div>
+                    <Text
+                      style={{"width":"100%"}} font_size={14} 
+                      className='orange-font font-bold' dangerouslySetInnerHTML={{__html: data["content"]}}/>
                   </ProblemWrap>
-                  <Bar src={t('test')['bar']} alt={t('test')['bar']}/>
+                  <BigBar src={t('test')['bar']} alt={t('test')['bar']}/>
                 </div>
                 <ButtonWrap>
-                  <StyledButton className='test-btn-A' onClick={ () => {next(data["type"], data["A"])} }>
-                  {
-                    data["text-A"]
-                    .map((text, idx) => {
-                      return (<ButtonText key={idx}>{text}</ButtonText>);
-                    })
-                  }
+                  <StyledButton onClick={ () => {next(data["type"], data["A"])} }>
+                    <Text dangerouslySetInnerHTML={{__html: data["text-A"]}}/>
                   </StyledButton>
-                  <StyledButton className='test-btn-B' onClick={ () => {next(data["type"], data["B"])} }>
-                  {
-                    data["text-B"]
-                    .map((text, idx) => {
-                      return (<ButtonText key={idx}>{text}</ButtonText>);
-                    })
-                  }
+                  <StyledButton onClick={ () => {next(data["type"], data["B"])} }>
+                    <Text dangerouslySetInnerHTML={{__html: data["text-B"]}}/>
                   </StyledButton>
                 </ButtonWrap>
-              </ScrollerItem>
+              </Item>
             );
-            })
+          })
         }
-        </ScrollerItems>
-      </Scroller>
+        </Items>
+      </Viewer>
     </StyledArticle>
   );
 };
