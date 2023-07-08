@@ -88,7 +88,7 @@ const Result = () => {
         content: {
           title: t('result')['share-content'].kakao['send-text-title'], // 보여질 제목
           description: t('result')['share-content'].kakao['send-text-description'], // 보여질 설명
-          imageUrl: t('result')['result-data'][code * 1]['src'], // 콘텐츠 URL
+          imageUrl: t('images')['mbti-images'][mbti], // 콘텐츠 URL
 
           link: {
             mobileWebUrl: sendUrl,
