@@ -38,6 +38,7 @@ const Text = styled.p`
   display: block;
   margin-bottom: 0px;
   line-height: 1.17;
+  word-break: keep-all;
   ${({ font_size }) => {
     return `font-size: ${font_size}px`;
   }};
@@ -88,7 +89,7 @@ const Result = () => {
         content: {
           title: t('result')['share-content'].kakao['send-text-title'], // 보여질 제목
           description: t('result')['share-content'].kakao['send-text-description'], // 보여질 설명
-          imageUrl: t('images')['mbti-images'][mbti], // 콘텐츠 URL
+          imageUrl: t('result')['result-data'][code * 1]['src'], // 콘텐츠 URL
 
           link: {
             mobileWebUrl: sendUrl,
@@ -115,11 +116,11 @@ const Result = () => {
   
   useEffect(() => {
     for (var key in t('result')['result-data']) {
-      if (t('result')['result-data'][key].code === code) {
+      if (t('result')['result-data'][key].code == code) {
         setMbti(key);
       }
     }
-  }, [t, code])
+  }, [])
 
   const getBars = (image1, image2, repeat=6) => {
     var arr = [];
@@ -133,6 +134,26 @@ const Result = () => {
     }
     return arr;
   }
+
+  //set title
+  document
+    .querySelector('meta[property="og:title"]')
+    .setAttribute("content", `나는 ${t('result')['result-data'][mbti]["title"].split(">")[-1]}!`);
+    
+  //set description
+  document
+    .querySelector('meta[property="og:description"]')
+    .setAttribute("content", `혹시 당신이 나랑 어울리는 그 세렝게티 프렌즈?`);
+    
+  //set images
+  document
+    .querySelector('meta[property="og:image"]')
+    .setAttribute("content", `https://mbti-test-react.netlify.app${t('images')['mbti-images'][mbti]}`);
+    
+  //set url
+  document
+  .querySelector('meta[property="og:url"]')
+  .setAttribute("content", getUrl());
 
   return (
     <StyledArticle>
@@ -160,7 +181,7 @@ const Result = () => {
         <Bars bar_cnt={12}>
           { getBars(t('images')["mini-bars"]["on-back"], t('images')["mini-bars"]["on-start"])}
         </Bars>
-        <div style={{"margin-top": "36px"}}>{
+        <div style={{"marginTop": "36px"}}>{
           t('result')['result-data'][mbti]["content"]
           .map((content, idx)=> {
             return (<Text key={idx} 
@@ -179,7 +200,7 @@ const Result = () => {
 
       <img className="line" src={t('images')["x-bars"]} alt={t('images')["x-bars"]}/>
 
-      <div style={{"overflow": "auto", "margin-top":"24px", "margin-bottom": "44px"}}>
+      <div style={{"overflow": "auto", "marginTop":"24px", "marginBottom": "44px"}}>
         <div>
           <ResultImage style={{"width": "30px", "height": "30px", "margin": "0"}} src={t('images')["tree"]} alt={t('images')["tree"]}/>
         </div>
@@ -192,7 +213,7 @@ const Result = () => {
           .map((friend_feature, idx) => {
             const [friend, feature_img, feature_text, floatD] = friend_feature;
             return (
-              <div key={idx} style={{"width": "45%", "float": floatD}}>
+              <div key={idx} style={{"width": "45%", "height":"230px", "position": "relative", "float": floatD}}>
                 <img style={{"width": "30px", "height": "30px", "margin": "10px 0"}} src={feature_img} alt={feature_img}/>
                 <Text 
                   font_size={13} 
@@ -203,6 +224,7 @@ const Result = () => {
                 </ResultImage>
                 <Text 
                   font_size={13}
+                  style={{"position": "absolute", "bottom": "0"}}
                   dangerouslySetInnerHTML={{__html: t('result')['result-data'][friend]["title"]}}/>
               </div>
             );
