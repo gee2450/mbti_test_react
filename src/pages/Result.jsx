@@ -38,6 +38,7 @@ const Text = styled.p`
   display: block;
   margin-bottom: 0px;
   line-height: 1.17;
+  word-break: keep-all;
   ${({ font_size }) => {
     return `font-size: ${font_size}px`;
   }};
@@ -192,7 +193,7 @@ const Result = () => {
           .map((friend_feature, idx) => {
             const [friend, feature_img, feature_text, floatD] = friend_feature;
             return (
-              <div key={idx} style={{"width": "45%", "float": floatD}}>
+              <div key={idx} style={{"width": "45%", "height":"230px", "position": "relative", "float": floatD}}>
                 <img style={{"width": "30px", "height": "30px", "margin": "10px 0"}} src={feature_img} alt={feature_img}/>
                 <Text 
                   font_size={13} 
@@ -203,6 +204,7 @@ const Result = () => {
                 </ResultImage>
                 <Text 
                   font_size={13}
+                  style={{"position": "absolute", "bottom": "0"}}
                   dangerouslySetInnerHTML={{__html: t('result')['result-data'][friend]["title"]}}/>
               </div>
             );
