@@ -1,4 +1,3 @@
-import { Button } from 'react-bootstrap';
 import { React, useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import StyledArticle from '../component/Article';
@@ -51,7 +50,7 @@ const ButtonWrap = styled.div`
   border: 8px solid #343a40;
   margin: 0 auto;
 `;
-const StyledButton = styled(Button)`
+const StyledButton = styled.button`
   background: rgb(0,0,0,0);
   width: 100%;
   min-height: 100px;
@@ -59,10 +58,15 @@ const StyledButton = styled(Button)`
   border-radius: 0%;
   font-size: 13px;
   display: block;
+  color: white;
 
   &:hover{  
     background: rgb(0, 0, 0, 0);
     border: 0.5px solid #343a40;
+    color : #f90;
+  }
+  &:active{
+    background: rgb(0, 0, 0, 0);
     color : #f90;
   }
 `;

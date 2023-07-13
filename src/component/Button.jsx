@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const StyledButton = styled(Button)`
+const StyledButton = styled.button`
   background: rgb(0, 0, 0, 0);
   width: 288px;
   border: 8px solid #f90;
@@ -19,6 +18,10 @@ const StyledButton = styled(Button)`
   &:hover{  
     background-color : #f90;
     border: 8px solid #f90;
+    color : black;
+  };
+  &:active{
+    background-color : #f90;
     color : black;
   }
 `;
