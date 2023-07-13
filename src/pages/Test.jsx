@@ -97,10 +97,10 @@ const Test = () => {
     var arr = [];
     arr.push(t('images')['mini-bars']["on-start"]);
     for (var i=1; i<problemMaxNum; i++) {
-      arr.push(i % 2 == 1 ? t('images')['mini-bars']["off-back"] : t('images')['mini-bars']["off-start"]);
+      arr.push(i % 2 === 1 ? t('images')['mini-bars']["off-back"] : t('images')['mini-bars']["off-start"]);
     }
     setData(prev => ({...prev, images: arr}));
-  }, []);
+  }, [t, problemMaxNum]);
 
   function next(type, state) {
     // save answer score

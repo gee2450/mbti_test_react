@@ -116,11 +116,11 @@ const Result = () => {
   
   useEffect(() => {
     for (var key in t('result')['result-data']) {
-      if (t('result')['result-data'][key].code == code) {
+      if (t('result')['result-data'][key].code === code) {
         setMbti(key);
       }
     }
-  }, [])
+  }, [t, code])
 
   const getBars = (image1, image2, repeat=6) => {
     var arr = [];
