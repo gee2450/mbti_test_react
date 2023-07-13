@@ -97,7 +97,7 @@
         },
         "ESFJ": {
             "code": 2, 
-            "title": "목표는 이루기 위해있는 것!<br/>함께 최고의 결과를 이끄는<br/><span class='font-bold'>리더 고릴라",
+            "title": "목표는 이루기 위해있는 것!<br/>함께 최고의 결과를 이끄는<br/><span class='font-bold'>리더 고릴라</span>",
             "content": 
             [
                 "숨쉬는 것도 내 계획 중 일부! ",
@@ -118,7 +118,7 @@
         },
         "ESFP": {
             "code": 3, 
-            "title": "반복되는 건 지루해!<br/>새로운 자극제를 찾아다니는<br/><span class='font-bold'>모험가 미어캣",
+            "title": "반복되는 건 지루해!<br/>새로운 자극제를 찾아다니는<br/><span class='font-bold'>모험가 미어캣</span>",
             "content": 
             [
                 "계획이 곧 족쇄. ",
@@ -139,7 +139,7 @@
         },
         "ENTJ": {
             "code": 4, 
-            "title": "내 사전에 결정장애란 없다!<br/><span class='font-bold'>단호박 판사 호랑이",
+            "title": "내 사전에 결정장애란 없다!<br/><span class='font-bold'>단호박 판사 호랑이</span>",
             "content": 
             [
                 "'오늘은 김치찌개 드시죠!' 계획을 진행함에 있어 ",
@@ -162,7 +162,7 @@
         },
         "ENTP": {
             "code": 5,
-            "title": "새로운 시도는 언제나 환영이지<br/><span class='font-bold'>도전가 태양새",
+            "title": "새로운 시도는 언제나 환영이지<br/><span class='font-bold'>도전가 태양새</span>",
             "content": 
             [
                 "낯선 계획에서, 가장 재밌는 냄새가 난다..",
@@ -185,7 +185,7 @@
         },
         "ENFJ": {
             "code": 6, 
-            "title": "내 계획은 모두 조절할 수 있어!<br/><span class='font-bold'>평화주의자 카피바라",
+            "title": "내 계획은 모두 조절할 수 있어!<br/><span class='font-bold'>평화주의자 카피바라</span>",
             "content": 
             [
                 "사실...니 계획에 맞추는게 내 계획이야. ",
@@ -207,7 +207,7 @@
         },
         "ENFP": {
             "code": 7,
-            "title": "반짝이는 아이디어로<br/>새로운 계획을 짜 지루할 틈이 없는<br/><span class='font-bold'>멋쟁이 사자",
+            "title": "반짝이는 아이디어로<br/>새로운 계획을 짜 지루할 틈이 없는<br/><span class='font-bold'>멋쟁이 사자</span>",
             "content": 
             [
                 "새로운 계획, 새로워, 늘 짜릿해. ",
@@ -231,7 +231,7 @@
         },
         "ISTJ": {
             "code": 8,
-            "title": "계획만 세워도<br/>오늘 공부의 반은 했다!<br/><span class='font-bold'>프로계획러 하마",
+            "title": "계획만 세워도<br/>오늘 공부의 반은 했다!<br/><span class='font-bold'>프로계획러 하마</span>",
             "content": 
             [
                 "시험일정이 잡혔을 때, 친구들과 약속이 잡혔을 때",
@@ -252,7 +252,7 @@
         },
         "ISTP": {
             "code": 9, 
-            "title": "계획은 계획일 뿐.<br/>상황에 따라 계획을 바꾸는<br/><span class='font-bold'>유연한 나무늘보",
+            "title": "계획은 계획일 뿐.<br/>상황에 따라 계획을 바꾸는<br/><span class='font-bold'>유연한 나무늘보</span>",
             "content": 
             [
                 "안드로이드급의 무표정으로",
@@ -277,7 +277,7 @@
         },
         "ISFJ": {
             "code": 10, 
-            "title": "너가 그렇게 하고 싶다면..<br/><span class='font-bold'>배려왕 부엉이",
+            "title": "너가 그렇게 하고 싶다면..<br/><span class='font-bold'>배려왕 부엉이</span>",
             "content": 
             [
                 "다른 사람과 계획을 짤 때 너의 말도, ",
@@ -303,7 +303,7 @@
         },
         "ISFP": {
             "code": 11, 
-            "title": "모로 가도 서울로만 가면 돼!<br/><span class='font-bold'>무한긍정 거북이",
+            "title": "모로 가도 서울로만 가면 돼!<br/><span class='font-bold'>무한긍정 거북이</span>",
             "content": 
             [
                 "비행기 티켓만 끊어도",
@@ -326,7 +326,7 @@
         },
         "INTJ": {
             "code": 12, 
-            "title": "치타는 다 계획이 있구나..<br/><span class='font-bold'>선구자 치타",
+            "title": "치타는 다 계획이 있구나..<br/><span class='font-bold'>선구자 치타</span>",
             "content": 
             [
                 "연애 상담을 하다보면 결혼과 출산까지 염두해서 ",
@@ -350,7 +350,7 @@
         },
         "INTP": {
             "code": 13, 
-            "title": "계획은 여러 개 있을 수록 좋아!<br/>경우의 수를 계속 생각하는<br/><span class='font-bold'>타짜 침팬지",
+            "title": "계획은 여러 개 있을 수록 좋아!<br/>경우의 수를 계속 생각하는<br/><span class='font-bold'>타짜 침팬지</span>",
             "content": 
             [
                 "계획이 틀어져? 오히려 좋아. ",
@@ -374,7 +374,7 @@
         },
         "INFJ": {
             "code": 14,
-            "title": "계획적으로<br/>생활하는 것이 곧 삶의 기쁨<br/><span class='font-bold'>스케쥴러 물소",
+            "title": "계획적으로<br/>생활하는 것이 곧 삶의 기쁨<br/><span class='font-bold'>스케쥴러 물소</span>",
             "content": 
             [
                 "첫 만남에 맘에 드는 상대를 발견하고 ",
@@ -398,7 +398,7 @@
         },
         "INFP": {
             "code": 15, 
-            "title": "이게 가장 나답고 완벽한 계획이야.<br/><span class='font-bold'>나잘알 코끼리",
+            "title": "이게 가장 나답고 완벽한 계획이야.<br/><span class='font-bold'>나잘알 코끼리</span>",
             "content": 
             [
                 "나는 내가 제일 좋아.. 나만큼 나를 잘 아는 사람은 없어! ",
