@@ -152,8 +152,8 @@ const Result = () => {
     
   //set url
   document
-  .querySelector('meta[property="og:url"]')
-  .setAttribute("content", getUrl());
+    .querySelector('meta[property="og:url"]')
+    .setAttribute("content", getUrl());
 
   return (
     <StyledArticle>
