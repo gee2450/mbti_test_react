@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import StyledArticle from '../component/Article';
 import styled from 'styled-components';
 import { useTranslation } from "react-i18next";
+import { setMetaTags } from '../method/SetMetaTags';
 
 //#region styled-components
 const Bars = styled.div`
@@ -87,6 +88,13 @@ const Test = () => {
     images: []
   });
 
+  useEffect(() => {
+    setMetaTags(
+      "당장 테스트 하러 가자!", "나는 어떻게 계획을 세우는 타입?", 
+      "https://mbti-test-react.netlify.app/images/common-img/img-mbti-all@2x.png",
+      "https://mbti-test-react.netlify.app/test");
+  }, [])
+
   // button click method
   const problemMaxNum = t('test')['data'].length;
 
@@ -118,7 +126,7 @@ const Test = () => {
       })
       
       console.log(`before: ${result}, after: ${parseInt(result, 2)}`);
-      navigate(`/result?code=${parseInt(result, 2)}`);
+      navigate(`/result/${parseInt(result, 2)}`);
     }
     else {
       // change progress bar images

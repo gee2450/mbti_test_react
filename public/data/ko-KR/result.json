@@ -11,16 +11,13 @@
         "title": "세렝게티 동물<br/><span class='font-bold'>공유하기</span>",
         "content": "나랑 어울리는 세렝게티 프렌즈를<br/>주위 사람들 중에서 찾아보세요!<br/>내 단짝은 생각보다 가까운 곳에 있을지도 몰라요~"
     },
-    "share-content" : 
+    "share-content": 
     {
+        "title": "나는 ##!",
+        "send-text-description": "혹시 당신이 나랑 어울리는 세렝게티 프렌즈?",
         "link":
         {
             "send-text": "URL이 복사되었습니다."
-        },
-        "kakao": 
-        {
-            "send-text-title": "나는 어떻게 계획을 세우는 타입일까?",
-            "send-text-description": "!! 설명 !!"
         },
         "twitter":
         {

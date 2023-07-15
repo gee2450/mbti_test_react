@@ -1,10 +1,11 @@
-import { React } from 'react';
+import { React, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import StyledArticle from '../component/Article';
 import styled from 'styled-components';
 import { useTranslation } from "react-i18next";
 import HoverButton from '../component/Button';
+import { setMetaTags } from '../method/SetMetaTags';
 
 //#region styled-components
 const StyledDiv = styled.div`
@@ -47,6 +48,13 @@ const Image = styled.img`
 
 const Start = () => {
   const { t } = useTranslation('translations');
+  
+  useEffect(() => {
+    setMetaTags(
+      "올해 진짜 새 삶 산다!", "나는 어떻게 계획을 세우는 타입?", 
+      "https://mbti-test-react.netlify.app/images/common-img/img-mbti-all@2x.png",
+      "https://mbti-test-react.netlify.app/");
+  }, [])
 
   // button click method - go to next page, test page
   const navigate = useNavigate();

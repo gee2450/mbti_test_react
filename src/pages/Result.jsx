@@ -1,10 +1,13 @@
-import { React, useEffect, useState } from 'react';
-import { useNavigate, useLocation } from "react-router-dom";
+import { React, useEffect } from 'react';
+import { useNavigate, useParams } from "react-router-dom";
 import StyledArticle from '../component/Article';
 import styled from 'styled-components';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useTranslation } from "react-i18next";
 import HoverButton from '../component/Button';
+import { useMemo } from 'react';
+import { setMetaTags } from '../method/SetMetaTags';
+import { useState } from 'react';
 
 //#region styled-components
 const Bars = styled.div`
@@ -48,11 +51,31 @@ const Text = styled.p`
 const Result = () => {
   const { t } = useTranslation();
 
-  // get test result code from url queary string
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const code = parseInt(searchParams.get('code')) || 0; 
-  const [ mbti, setMbti ] = useState("ISFP");
+  // get parameter in url
+  const { code } = useParams();
+  const mbti = useMemo(() => {
+    var _mbti = "";
+    for (var key in t('result')['result-data']) {
+      if (Number(t('result')['result-data'][key].code) === Number(code)) {
+        _mbti = key;
+        break;
+      }
+    }
+    return _mbti;
+  }, [code, t])
+
+  // get animal using mbti code
+  const [ animal, setAnimal ] = useState("");
+  useEffect(() => {
+    const _title_arr = t('result')['result-data'][mbti]["title"].split(/[<>]/);
+    setAnimal(_title_arr[_title_arr.length - 3]);
+
+    setMetaTags(
+      t('result')['share-content']['title'].replace("##", animal), 
+      t('result')['share-content']['description'], 
+      t('images')['mbti-images'][mbti],
+      `https://mbti-test-react.netlify.app/result/${code}`);
+  }, [t, mbti, code, animal]);
   
   // restart button method
   const navigate = useNavigate();
@@ -62,10 +85,10 @@ const Result = () => {
     var url = window.document.location.href;  //url에는 현재 주소값을 넣어줌
     return url;
   }
+
   // share functions
   function shareTwitter() {
     var sendText = t('result')['share-content'].twitter['send-text']; // 전달할 텍스트
-
     var sendUrl = getUrl(); // 전달할 URL
     window.open("https://twitter.com/intent/tweet?text=" + sendText + "&url=" + sendUrl);
   }
@@ -87,8 +110,8 @@ const Result = () => {
         container: '#kakao_image', // 카카오공유버튼ID
         objectType: 'feed',
         content: {
-          title: t('result')['share-content'].kakao['send-text-title'], // 보여질 제목
-          description: t('result')['share-content'].kakao['send-text-description'], // 보여질 설명
+          title: t('result')['share-content']['title'].replace("##", animal), // 보여질 제목
+          description: t('result')['share-content']['description'], // 보여질 설명
           imageUrl: `https://mbti-test-react.netlify.app${t('images')['mbti-images'][mbti]}`, // 콘텐츠 URL
 
           link: {
@@ -114,14 +137,6 @@ const Result = () => {
     return sendUrl;
   }
   
-  useEffect(() => {
-    for (var key in t('result')['result-data']) {
-      if (t('result')['result-data'][key].code === code) {
-        setMbti(key);
-      }
-    }
-  }, [t, code])
-
   const getBars = (image1, image2, repeat=6) => {
     var arr = [];
     for (let i = 0; i < repeat; i++) {
@@ -134,29 +149,6 @@ const Result = () => {
     }
     return arr;
   };
-
-  const _title_arr = t('result')['result-data'][mbti]["title"].split(/[<>]/);
-  console.log(_title_arr);
-
-  //set title
-  document
-    .querySelector('meta[property="og:title"]')
-    .setAttribute("content", `나는 ${_title_arr[_title_arr.length - 3]}!`);
-    
-  //set description
-  document
-    .querySelector('meta[property="og:description"]')
-    .setAttribute("content", `혹시 당신이 나랑 어울리는 그 세렝게티 프렌즈?`);
-    
-  //set images
-  document
-    .querySelector('meta[property="og:image"]')
-    .setAttribute("content", `https://mbti-test-react.netlify.app${t('images')['mbti-images'][mbti]}`);
-    
-  //set url
-  document
-    .querySelector('meta[property="og:url"]')
-    .setAttribute("content", getUrl());
 
   return (
     <StyledArticle>

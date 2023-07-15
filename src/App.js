@@ -11,7 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Start />}></Route>
         <Route path="/test" element={<Test />}></Route>
-        <Route path="/result" element={<Result />}></Route>
+        <Route path="/result/:code" element={<Result />}></Route>
       </Routes>
     </BrowserRouter>
   );
