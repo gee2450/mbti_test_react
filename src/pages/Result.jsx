@@ -123,20 +123,19 @@ const Result = () => {
     }
   }
   function shareUrl() {
-    var sendUrl = getUrl();
-
-    var textarea = document.createElement("textarea");  
-    
-    document.body.appendChild(textarea);
-    textarea.value = sendUrl;  // textarea 값에 sendUrl를 넣어줌
-    textarea.select();  //textarea를 설정
-    document.execCommand("copy");   // 복사
-    document.body.removeChild(textarea); //extarea 요소를 없애줌
-        
-    alert(t('result')['share-content'].link['send-text'])  // 알림창
-    return sendUrl;
+    if (navigator.clipboard) {
+      navigator.clipboard
+        .writeText(getUrl())
+        .then(() => {
+          alert(t('result')['share-content'].link['send-text'])  // 알림창
+        })
+        .catch(() => {
+          alert(t('result')['share-content'].link['error-text'])
+        });
+    }
   }
   
+  // create bars arr
   const getBars = (image1, image2, repeat=6) => {
     var arr = [];
     for (let i = 0; i < repeat; i++) {
@@ -154,13 +153,13 @@ const Result = () => {
     <StyledArticle>
       <div className="header">
         <Bars bar_cnt={12}>
-          {getBars(t('images')["mini-bars"]["off-back"], t('images')["mini-bars"]["off-start"])}
+          { getBars(t('images')["mini-bars"]["off-back"], t('images')["mini-bars"]["off-start"]) }
         </Bars>
         <Text 
           font_size={24} className="orange-font" style={{"margin": "20px 0"}}
           dangerouslySetInnerHTML={{__html: t('result').header}}/>
         <Bars bar_cnt={12}>
-          { getBars(t('images')["mini-bars"]["on-start"], t('images')["mini-bars"]["on-back"])}
+          { getBars(t('images')["mini-bars"]["on-start"], t('images')["mini-bars"]["on-back"]) }
         </Bars>
       </div>
 
