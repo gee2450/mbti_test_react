@@ -1,17 +1,8 @@
 {
     "namespace": "start",
     "lng": "en",
-    "title": 
-    [
-        "Am I",
-        "the type",
-        "to make plans?"
-    ],
-    "intro": 
-    [
-        "Real new life", 
-        "this year!"
-    ],
+    "title": "Am I<br/>the type<br/>to make plans?",
+    "intro": "Real new lif<br/>this year!",
     "image": "/images/img-mbti-all@2x.png",
     "btn-test-start": "Get to know Serengeti animals"
 }
